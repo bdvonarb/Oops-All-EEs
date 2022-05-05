@@ -4,6 +4,7 @@ This repository is a buildroot external tree, and is meant to be checked out in 
 
 The structure should be as folows:
 
+```
 .
 ├── buildroot
 │   ├── arch
@@ -35,7 +36,7 @@ The structure should be as folows:
     ├── images
     ├── staging -> /home/bdvonarb/oops-all-ees/pi4-output/host/aarch64-buildroot-linux-gnu/sysroot
     └── target
-
+```
 
 The buildroot directory should be downloaded following the instructions here https://buildroot.org/downloads/manual/manual.html#getting-buildroot
 
