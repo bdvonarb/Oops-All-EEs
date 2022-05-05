@@ -1,0 +1,4 @@
+config BR2_PACKAGE_CVDEVICE
+	bool "cvdevice"
+	help
+		Component that performs computer vision image processing

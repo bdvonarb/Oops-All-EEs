@@ -1,0 +1,23 @@
+#!/bin/bash
+echo "Preparing kweb environment ..."
+if [ -f ~/.kweb.conf ]
+then
+rm ~/.kweb.conf
+fi
+if [ -f ~/kweb_about_c.html ]
+then
+rm ~/kweb_about_c.html
+fi
+kwebhelper.py cmd "#formdataintern&proc=update"
+echo
+kwebcheck.py
+echo
+if [ ! -d ~/youtube-dl ]
+then
+echo "You do not have youtube-dl from github installed."
+echo "It is needed for best web video support."
+read -n 1 -p "Do you want to install it now? (y)" YTDLINSTALL
+if [ "$YTDLINSTALL" == "y" ]; then
+ginstall-ytdl
+fi
+fi

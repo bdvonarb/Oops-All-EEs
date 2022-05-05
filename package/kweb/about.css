@@ -1,0 +1,166 @@
+html 
+{
+	height: 100%; 
+	width: 100%;
+}
+body
+{	
+	margin:0px;
+	padding:0px;
+	background-color: rgb(255, 255, 255);
+	color: rgb(0, 0, 50);
+	font-weight: normal;
+	font-style: normal;
+	font-family: FreeSans;
+	font-size: 12pt;
+	height: 100%;
+	width: 100%;
+}
+a:link
+{
+        color: rgb(0, 102, 204);
+	font-weight: bold;
+        text-decoration: underline;
+}
+a:active
+{
+	color: rgb(124, 22, 00);
+	background-color: rgb(238, 238, 238);
+	text-decoration: underline overline;
+	font-weight: bold;
+}
+a:visited
+{
+	color: rgb(0, 102, 204);
+	font-weight: bold;
+        text-decoration: underline;
+}
+a:hover
+{
+        color: rgb(102, 153, 51);
+        text-decoration: underline overline;
+	font-weight: bold;
+}
+table
+{
+	font-weight: normal;
+	font-style: normal;
+	font-family: FreeSans;
+	border-color: rgb(0, 0, 50);
+}
+th
+{
+	font-family: FreeSans;
+	font-weight: bold;
+	color: rgb(0, 0, 50);
+	background-color: rgb(255, 193, 85);
+}
+td
+{
+	vertical-align:top;
+	text-align:left; 
+}
+h1
+{
+	font-weight: bold;
+	font-family: FreeSans;
+	font-style: normal;
+	font-size: 1.6em;
+	line-height: 160%;
+	margin: 0;
+	color: rgb(0, 0, 50);
+}
+h2
+{
+	font-weight: bold;
+	font-style: normal;
+	font-family: FreeSans;
+	font-size: 1.5em;
+	line-height: 150%;
+	margin: 0;
+	color: rgb(0, 0, 50);
+}
+h3
+{
+	font-weight: bold;
+	font-style: normal;
+	font-family: FreeSans;
+	font-size: 1.4em;
+	line-height: 140%;
+	margin: 0;
+	color: rgb(0, 0, 50);
+}
+h4
+{
+	font-weight: bold;
+	font-family: FreeSans;
+	font-style: normal;
+	font-size: 1.3em;
+	line-height: 130%;
+	margin: 0;
+	color: rgb(0, 0, 50);
+}
+h5
+{
+	font-weight: bold;
+	font-family: FreeSans;
+	font-style: normal;
+	font-size: 1.2em;
+	line-height: 120%;
+	margin: 0;
+	color: rgb(0, 0, 50);
+}
+h6
+{
+	font-weight: bold;
+	font-style: normal;
+	font-family: FreeSans;
+	font-size: 1.1em;
+	line-height: 110%;
+	margin: 0;
+	color: rgb(0, 0, 50);
+}
+hr
+{
+	color: rgb(0, 0, 50);
+}
+button, input, textarea
+{
+	font-style: normal;
+	font-weight: bold;
+	font-family: FreeSans;
+	font-size: 12pt;
+	color: rgb(0, 0, 50);
+}
+label
+{
+	font-style: normal;
+	font-family: FreeSans;
+	color: rgb(0, 0, 50);
+}
+caption
+{
+	font-family: FreeSans;
+	font-style: normal;
+}
+
+legend
+{
+	font-style: normal;
+	font-family: FreeSans;
+}
+marquee
+{
+	font-family: FreeSans;
+}
+select
+{
+	border-style:solid;
+	font-style: normal;
+	font-family: FreeSans;
+	
+}
+iframe
+{
+	border-width: 0px;
+}

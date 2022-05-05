@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=omxplayerGUI
+Comment=GUI frontend for omxplayer
+GenericName=Media Player
+Exec=omxplayergui %u
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=omxplayergui.png
+Categories=AudioVideo;Player;
+MimeType=video/mpeg;video/x-mpeg;video/msvideo;video/quicktime;video/x-avi;video/x-ms-asf;video/x-ms-wmv;video/x-msvideo;video/x-flv;video/mp4;video/mp4v-es;video/mp2t;application/ogg;application/x-ogg;video/x-ogm+ogg;audio/x-vorbis+ogg;application/x-matroska;audio/x-matroska;video/x-matroska;video/webm;audio/webm;audio/x-mp3;audio/x-mpeg;audio/mpeg;audio/x-wav;audio/x-mpegurl;audio/x-pn-aiff;
+StartupNotify=true
+

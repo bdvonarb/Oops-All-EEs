@@ -1,0 +1,24 @@
+#!/bin/sh
+file=__main__.py
+maxsize=1000
+if [ -d ~/youtube-dl ]
+then
+cd ~/youtube-dl
+git pull
+cd youtube_dl
+actualsize=$(wc -c "$file" | cut -f 1 -d ' ')
+if [ $actualsize -ge $maxsize ]
+then
+echo "restoring main file ..."
+wget -O __main__.py https://raw.githubusercontent.com/rg3/youtube-dl/master/youtube_dl/__main__.py
+chmod +x __main__.py
+else
+echo "main file ok"
+fi
+echo "compiling modules ..."
+youtube-dl --list-extractors > /dev/null 2>&1
+echo "done"
+else
+echo "youtube-dl from github not found"
+fi
+

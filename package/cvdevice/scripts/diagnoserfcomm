@@ -1,0 +1,162 @@
+#!/bin/sh
+
+echo Beginning RFCOMM Diagnosis
+
+
+
+for attempt in 1 2 3 4 5 6 7
+do
+    MESSAGE="Connection process taking longer than expected"
+
+    echo Trying to connect, attempt $attempt
+
+    echo Checking if HCI device exists
+    #see if hci device exists
+    OUTPUT=$(hciconfig)
+    echo ">" $OUTPUT
+
+    if [ "$OUTPUT" != "" ]; then 
+        #hci device exists
+        echo HCI device configured
+
+        #check if device is up
+        echo Checking if HCI device is up
+        OUTPUT=$(hciconfig | awk 'FNR == 3 {print $1}')
+        echo ">" $OUTPUT
+
+        if [ "$OUTPUT" == "UP" ]; then
+            #device is up
+            echo HCI device is up
+
+            #see if bluetooth daemon is running
+            echo Checking bluetoothd
+            OUTPUT=$(ps | grep bluetoothd | grep -v grep)
+            echo ">" $OUTPUT
+
+            if [ "$OUTPUT" != "" ]; then
+                #bluetoothd is running
+                echo Bluetooth daemon is running
+
+                #check if bluetooth module is powered
+                echo Checking if bluetooth module is powered
+
+                OUTPUT=$(bluetoothctl -- show --timeout 2 | grep Powered | awk '{print $2}')
+                echo ">" $OUTPUT
+
+                if [ "$OUTPUT" != "no" ]; then
+                    #bluetooth is powered
+                    echo Bluetooth module is powered
+
+                    #check if rfcomm is running
+                    echo Checking rfcomm
+                    OUTPUT=$(rfcomm | awk '{print $7}')
+                    echo ">" $OUTPUT
+
+                    if [ "$OUTPUT" == "connected" ]; then
+                        #rfcomm is currently running
+                        echo rfcomm is running
+                        break
+                    else 
+                        #rfcomm is not running
+                        echo rfcomm is not running, attempting to start
+                        /root/startrfcomm
+                        STATUS=$?
+                        if [ $STATUS -eq 0 ]; then
+                            #connection succesful
+                            MESSAGE="Connected"
+                            break
+                        elif [ $STATUS -eq 2 ]; then
+                            #connection refused, usually means everything is working and the pi0 is found but our program isn't running on it
+                            MESSAGE="Connection to panel unsuccessful, try restarting panel"
+                            break
+                        elif [ $STATUS -eq 3 ]; then
+                            #host is down, usually means everything is working but the pi0 is not powered or is out of range
+                            MESSAGE="Connection to panel unsuccessful, perhaps panel is not powered or is out of range"
+                            break
+                        elif [ $STATUS -eq 4 ]; then
+                            #Connection has been closed, usually means we were connected then the panel lost power
+                            MESSAGE="Connection to panel unsuccessful, perhaps panel has lost power"
+                            break
+                        else
+                            #one of the weird errors, shut everyting down then try again
+                            MESSAGE="Connection to panel unsuccessful, trying again"
+                            rfcomm release all
+                            sleep 3
+                            bluetoothctl -- power off
+                            sleep 3
+                            /etc/init.d/S40bluetooth stop
+                            sleep 3
+                            break
+                        fi
+
+                    fi
+                else 
+                    #bluetooth module is not powered
+                    echo Bluetooth module is not powered, attempting to power up
+
+                    OUTPUT=$(bluetoothctl -- power on | grep succeeded)
+                    echo ">" $OUTPUT
+
+                    if [ "$OUTPUT" != "" ]; then
+                        #bluetooth power on successful
+                        echo Bluetooth module powered succesfully
+                    else
+                        #bluetooth power on failed
+                        MESSAGE="Can't power up bluetooth module, trying again soon"
+                        echo Bluetooth module could not be powered up
+                    fi
+
+                fi
+            else
+                #bluetoothd is not running, attempt to start it
+                echo Bluetooth daemon is not running, attempting to start it
+
+                OUTPUT=$(/etc/init.d/S40bluetooth start)
+                echo ">" $OUTPUT
+                #check for successful start
+                if [ "$OUTPUT" != "Starting bluetoothd: OK" ]; then
+                    #bluetoothd start failed
+                    MESSAGE="Can't start bluetooth daemon, trying again soon"
+                    echo bluetoothd start failed
+                else
+                    #bluetoothd start succesful
+                    echo bluetoothd started succesfully
+                fi
+            fi
+        else
+            #HCI device is down
+            echo HCI device is down, attempting to bring it up
+            
+            OUTPUT=$(hciconfig hci0 up)
+            echo ">" $OUTPUT
+            MESSAGE="Bluetooth module has encountered a fatal error, if message persists, please restart the device"
+
+        fi
+    else 
+        #hci device does not exist, attempt to create it
+        echo HCI device has not been created, attempting to create it
+
+        OUTPUT=$(hciattach ttyS0 bcm43xx 921600 -)
+        echo ">" $OUTPUT
+
+        if [[ "$OUTPUT" =~ .*"Device setup complete".* ]]; then
+            #something went wrong
+            MESSAGE="Bluetooth module has encountered a fatal error, please restart the device"
+            echo HCI device attach failed
+        else
+            #hci device created succesfully
+            echo HCI device attach succesfull
+        fi
+    fi
+done
+
+echo
+echo
+echo
+echo
+echo $MESSAGE
+echo $MESSAGE > bluetoothstatus.txt
+echo
+echo
+echo
+echo

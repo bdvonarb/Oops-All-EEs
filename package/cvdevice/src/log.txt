@@ -1,0 +1,81 @@
+[18443010B1AA1EF500] [17.657] [NeuralNetwork(4)] [warning] Network compiled for 4 shaves, maximum available 13, compiling for 6 shaves likely will yield in better performance
+[18443010B1AA1EF500] [17.885] [NeuralNetwork(8)] [warning] Number of inference threads assigned for network is 1, assigning 2 will likely yield in better performance
+[18443010B1AA1EF500] [17.885] [NeuralNetwork(8)] [warning] Network compiled for 4 shaves, maximum available 13, compiling for 6 shaves likely will yield in better performance
+[18443010B1AA1EF500] [17.899] [NeuralNetwork(4)] [warning] The issued warnings are orientative, based on optimal settings for a single network, if multiple networks are running in parallel the optimal settings may vary
+[18443010B1AA1EF500] [17.900] [NeuralNetwork(8)] [warning] The issued warnings are orientative, based on optimal settings for a single network, if multiple networks are running in parallel the optimal settings may vary
+Can't create device: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 906, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/usr/lib/python3.9/site-packages/eel/__init__.py", line 303, in _process_message
+KeyError: 'value'
+2022-04-12T20:38:02Z <Greenlet at 0x7fb155f150: _process_message({'return': 3.334974817591578, 'status': 'error', ', <geventwebsocket.websocket.WebSocket object at 0x7)> failed with KeyError
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 906, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/usr/lib/python3.9/site-packages/eel/__init__.py", line 303, in _process_message
+KeyError: 'value'
+2022-04-12T20:38:05Z <Greenlet at 0x7fb155f260: _process_message({'return': 6.987801175379679, 'status': 'error', ', <geventwebsocket.websocket.WebSocket object at 0x7)> failed with KeyError
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 906, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/usr/lib/python3.9/site-packages/eel/__init__.py", line 303, in _process_message
+KeyError: 'value'
+2022-04-12T20:38:08Z <Greenlet at 0x7fb155f260: _process_message({'return': 9.9891579389884, 'status': 'error', 'er, <geventwebsocket.websocket.WebSocket object at 0x7)> failed with KeyError
+
+Can't connect RFCOMM socket: Invalid argument
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 906, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/usr/lib/python3.9/site-packages/eel/__init__.py", line 303, in _process_message
+KeyError: 'value'
+2022-04-12T20:38:11Z <Greenlet at 0x7fb0c9ce10: _process_message({'return': 12.793189911621715, 'status': 'error', , <geventwebsocket.websocket.WebSocket object at 0x7)> failed with KeyError
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 906, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/root/cv.py", line 48, in cvLoop
+    settings.newFrameTime(time.time())
+  File "/root/settings.py", line 18, in newFrameTime
+    previousFrameTime = currentFrameTime
+UnboundLocalError: local variable 'currentFrameTime' referenced before assignment
+2022-04-12T20:38:13Z <Greenlet at 0x7fb0c9c8c0: <bound method CV_Thread.cvLoop of <cv.CV_Thread object at 0x7fba671b80>>> failed with UnboundLocalError
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 906, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/usr/lib/python3.9/site-packages/eel/__init__.py", line 303, in _process_message
+KeyError: 'value'
+2022-04-12T20:38:13Z <Greenlet at 0x7fb0c9ce10: _process_message({'return': 15.910214792953004, 'status': 'error', , <geventwebsocket.websocket.WebSocket object at 0x7)> failed with KeyError
+
+Can't connect RFCOMM socket: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Can't connect RFCOMM socket: Invalid argument
+Palm detection blob     : /root/handtracker/models/palm_detection_sh4.blob
+Landmark blob           : /root/handtracker/models/hand_landmark_lite_sh4.blob
+PD post processing blob : /root/handtracker/custom_models/PDPostProcessing_top2_sh1.blob
+In Solo mode, # of landmark model threads is forced to 1
+Sensor resolution: (1920, 1080)
+Internal camera FPS set to: 36
+Internal camera image size: 1152 x 648 - pad_h: 252
+Creating pipeline...
+Creating Color Camera...
+Creating Palm Detection pre processing image manip...
+Creating Palm Detection Neural Network...
+Creating Palm Detection post processing Neural Network...
+Creating Hand Landmark pre processing image manip...
+Creating Hand Landmark Neural Network (1 thread)...
+Pipeline created.
+Pipeline started - USB speed: SUPER
+Status Update Loop Started
+Starting CV Loop
+Preview Update Loop Started
+Starting BT Loop
+[31mF: [global] [       618] [EventRead00Thr] usbPlatformRead:215	Cannot find file descriptor by key: 55[0m
+[31mF: [global] [       619] [Scheduler00Thr] usbPlatformWrite:271	Cannot find file descriptor by key: 55[0m
+[31mF: [global] [       620] [Scheduler00Thr] usbPlatformClose:759	Cannot find USB Handle by key[0m

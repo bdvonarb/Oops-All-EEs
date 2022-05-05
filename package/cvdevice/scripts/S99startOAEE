@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# Starts OAEE software
+#
+
+start() {
+	printf "Starting OAEE: "
+	startx &
+}
+
+stop() {
+	printf "Stopping OAEE: "
+	killall /root/browser
+	killall xterm
+}
+
+restart() {
+	stop
+	sleep 2
+	start
+}
+
+case "$1" in
+	start)
+		start
+	;;
+	stop)
+		stop
+	;;
+	restart|reload)
+		restart
+	;;
+	*)
+		echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac

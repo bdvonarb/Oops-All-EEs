@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PYTHON_DEPTHAI
+	bool "python-depthai"
+	help
+	  DepthAI Python Library.
+
+	  https://github.com/luxonis/depthai-python

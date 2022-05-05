@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ ! -f /usr/bin/nuitka ]
+then
+sudo dpkg -i nuitka_0.5.18.1+ds-1_all.deb
+fi
+nuitka omxplayergui.py
+chmod a+x omxplayergui.exe
+cp omxplayergui.exe ../omxplayergui
+

@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PYTHON_WHICHCRAFT
+	bool "python-whichcraft"
+	help
+	  This package provides cross-platform cross-python
+	  shutil.which functionality.
+
+	  https://github.com/pydanny/whichcraft

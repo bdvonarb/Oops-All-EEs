@@ -1,0 +1,4 @@
+config BR2_PACKAGE_PYTHON_PYREBASE4
+	bool "python-pyrebase4"
+	help
+		pyrebase4

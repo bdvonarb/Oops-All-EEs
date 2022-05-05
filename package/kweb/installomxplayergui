@@ -1,0 +1,7 @@
+#!/bin/sh
+cp kwebhelper_settings.py /usr/local/bin
+cp omxplayergui.py /usr/local/bin
+cp dbuscontrolm.sh /usr/local/bin
+cp omxplayergui.png /usr/share/pixmaps
+cp omxplayergui.desktop /usr/share/applications
+

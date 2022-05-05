@@ -1,0 +1,8 @@
+config BR2_PACKAGE_PYTHON_GEVENT_WEBSOCKET
+	bool "python-gevent-websocket"
+	select BR2_PACKAGE_PYTHON_GEVENT # runtime
+	help
+	  Websocket handler for the gevent pywsgi server, a Python
+	  network library.
+
+	  https://www.gitlab.com/noppo/gevent-websocket

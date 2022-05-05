@@ -1,0 +1,8 @@
+# md5, sha256 from https://pypi.org/pypi/depthai/json
+md5  8a4bcaddcb639987e5c5f6babea3a804  depthai-2.14.1.0.tar.gz
+sha256  cee30e13343d84be38f8f796b415a1bf319b43dec3c56e273534169ad24228ab  depthai-2.14.1.0.tar.gz
+# Locally computed sha256 checksums
+sha256  5fe6d4ec2aa4e228142ee71084d1c8bfea474238fee8d49bd10e8cbd0b44ace1  LICENSE
+sha256  5fe6d4ec2aa4e228142ee71084d1c8bfea474238fee8d49bd10e8cbd0b44ace1  depthai-core/LICENSE
+sha256  5fe6d4ec2aa4e228142ee71084d1c8bfea474238fee8d49bd10e8cbd0b44ace1  depthai-core/shared/depthai-shared/LICENSE
+sha256  a01060ff5157f7cc15d89c7ef27564fe04ec0e71476b97e52a5f1863600efb1c  depthai-core/shared/depthai-bootloader-shared/LICENSE

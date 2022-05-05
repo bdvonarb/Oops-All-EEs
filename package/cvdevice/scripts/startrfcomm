@@ -1,0 +1,55 @@
+#!/bin/sh
+
+#starts rfcomm and returns status
+
+echo Starting rfcomm
+
+rfcomm connect rfcomm0 B8:27:EB:C2:8A:73 2> rfcommstatus.txt &
+
+echo rfcomm started, awaiting status
+
+sleep 3
+
+for i in 1 2 3 4 5 6 #max wait of 33 seconds
+do
+    #check if process complete
+    echo Checking for connection in progress
+    OUTPUT=$(ps | grep rfcomm0 | grep -v grep)
+    echo $OUTPUT
+
+    if [ "$OUTPUT" != "" ]; then
+        #rfcomm is running
+        echo Connection in progress
+        OUTPUT=$(rfcomm | awk '{print $7}')
+        echo $OUTPUT
+        if [ "$OUTPUT" == "connected" ]; then
+            #we're connected properly
+            echo Connected
+            exit 0
+        elif [ "$OUTPUT" == "closed" ]; then
+            #connection is fucked up
+            echo Connection has been closed
+            exit 1
+        fi  
+    else 
+        #rfcomm is not running
+        echo rfcomm process terminated unexpectedly
+        OUTPUT=$(cat rfcommstatus.txt)
+        echo $OUTPUT
+
+        if [[ "$OUTPUT" =~ .*"Connection refused".* ]]; then
+            echo Connection was refused, perhaps the server is not running?
+            exit 2
+        elif [[ "$OUTPUT" =~ .*"Host is down".* ]]; then
+            echo Host is down, perhaps the panel is not powered or is out of range?
+            exit 3
+        else
+            echo Connection could not be made, try again later
+            exit 1
+        fi
+        exit 1
+    fi
+    sleep 5
+done
+
+exit 1

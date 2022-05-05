@@ -1,0 +1,941 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type"><title>Minimal Kiosk Browser Changelog</title>
+<link rel="stylesheet" type="text/css" href="file:///usr/local/share/kweb/about.css">
+</head><body>
+<h2>Minimal Kiosk Browser (kweb) Changelog</h2>
+<big style="font-weight: bold;">Version 1.7.0</big><br>
+kweb 1.7.0 is a major new release with a lot of changes in kweb itself and in its helper programs. Parts of the code have been rewritten and new  utilities have been added.<br><br>
+<b>1) kweb & kweb3</b><br>
+Toolbar:<br>
+A small menu has been added to the "Open" icon, that contains a number of commands, which have only been available from the keyboard so far(some are new):<br>
+"Save Page"<br>
+"Bookmark Page (,)" - Calls the new bookmark utility<br>
+"Open in New Browser (.)" - open current web page in new browser instance and close current window, if it's not the only one<br>
+"Toggle Source View (!)" - toggle between normal view and source code view<br>
+"Set as Home (l)"<br>
+"Search Similar (?)" -  web search based on the title of the current page<br>
+"Go to Start Page (#)" - go to page that opened when starting the browser (may be different from home page)<br>
+"Go to Menu Page"<br>
+"Quit Browser (q)"<br><br>
+New entry line options:<br>
+)URL - open URL in a  new window<br>
+))URL - open URL in a  new browser instance<br>
+@encoding  - set default encoding (empty = utf-8)<br><br>
+Keyboard commands:<br>
+all insert commands (except ALT+i) have been removed. Some  have got a new meaning, others have been added. Most of them are now available from the menu attached to the "Open" button (except ALT+i, ALT+f, ALT+k, ALT+m, ALT+c).<br>
+The handling of user definable keyboard commands (ALT+0 ... 9) has been changed: They now reside in /usr/local/share/kweb. Empty commands are created during installation (if not already defined). They are always available, except if no keyboard command is allowed. Creating your own keyboard commands is now very easy using a web form and doesn't require any HTML knowedge any more. The keyboard commands are also available as buttons in the new "Browser Utilities" page.<br>
+Besides ALT the Windows modifier can now also be used for keyboard commands.<br><br>
+Browser configuration:<br>
+Mixed handling of command line and configuration parameters: the command line takes precedence, but if either an options string or an URL are missing, they are taken from the config file (if available). Main advantage: if the browser is started from another application with an URL, it will still use the options settings from the config file.<br>
+It's now possible to create a kwebautoconfig.html page (using the same editor as used for keyboard commands). This page may a excecute any number of hidden commands and is executed before the start page is loaded.<br><br>
+Modified homepage handling:<br>
+The concept of a homepage.html file in the user's home directory has been abandoned. But you can still  use a homepage.html file, if you place it in /usr/local/share/kweb. The rules are now: if no homepage is defined on your configuration page, the  browser looks for /usr/local/share/kweb/homepage.html. If it doesn't exist, kweb's menu page (showing your bookmarks by default)  will be used as homepage. The distribution contains a few user editable homepage examples.<br><br>
+Other changes and additions:<br>
+Opening a link in a new browser instance (running on a different core on RPi2/3) when clicking it with the SHIFT key pressed will now work for all kinds of links.<br>
+It's now possible to zoom in and out using the mouse wheel while holding the CTRL key pressed as is standard in most browsers. This is limited to 50% minimum and 200% maximum.<br>
+The title of the current web page is now shown in the window title bar (if not disabled).<br>
+All stock icons in kweb have been replaced by named icons. The toolbar now looks the same as in kweb3.<br>
+If private browsing is enabled (default!) and cookies are disabled, the cookie file will be deleted,when the browser is closed. Saved cookies would be sent to a web page, even if cookies are disabled (and new cookies are not allowed).<br>
+Command execution is now enabled by default, whenever it is considered safe: if the start page or homepage are in the user's home directory it is considered to be not safe. Most kiosk applications will therefore have to enable command execution from the start script.<br>
+A new config option to forbid opening new windows in kiosk mode.<br>
+If a txt command link has an URL as argument, it will be sent to the current target (not to the entry line).<br>
+A keyboard command link can now send multiple keyboard commands at once.<br>
+Command execution errors (if commands are disabled) are now shown in the entry line instead of displaying an HTML error.<br><br>
+Code improvements and bug fixes:<br>
+All resources created by glib functions are now freed, when not used any more.<br>
+Bug fix for hompage setting (now also works without starting with "file://" or "http://")<br>
+Bug fix for settings inheritance.<br>
+Workaround for webkit bug: The initial spell checking language is now taken from the environment and explicitely set.<br><br>
+<b>kweb3 only</b><br>
+Hardware accelerated scrolling is now enabled. As this can still lead to problems with some pages (same as in epiphany), a script has been added to start kweb3 without accelerated scrolling: kweb3_nohs. This can also be called from a new entry in the application menu.<br><br>
+<b>2) kweb Environment</b><br>
+A new user editable :command page has been added: "Browser Utilities" (:u).<br>
+The default applications :command page has been modified. Some commands have been moved to the "Utilities"; a section to manage youtube-dl has been added.<br>
+The user can now  switch betweeń different CSS styles for all kweb pages: white, black, grey and user (editable). This is available on the new "Utilities" page. <br>
+The control panel page has been reorganized: the omxplayerGUI web interface has been removed (but is still available from the menu page); the "Utilities" page has been added instead.<br>
+The :editor page now contains a second editor (web form) to create  user definable keyboard commands (and also an autoconfiguration page).<br>
+The "Settings" page has a few new options at the bottom for the youtube-dl-server. Saved presets will be expanded during installation.<br><br>
+<b>3) New and Modified Utilities</b><br>
+kweb_bookmark.py (new):<br>
+A small GUI utility which is called from kweb directly. You can edit the name of the bookmark and select a position in the bookmarks page where the bookmark should be inserted.<br><br>
+kweb_edit.py (new): <br>
+A simple text editor for sources of command pages (and also keyboard command pages or your own projects), which replaces leafpad as editor. When you save the source text,  the matching html page will be created automatically. Therefore all "Generate" buttons have been removed.
+A context menu offers help for adding directives or simple HTML elements, besides the usual cut, copy, paste, undo and redo functions.<br><br>
+ytdl_server.py (new):<br>
+A small HTTP server application that speeds up the extraction of video URLs from web pages with youtube-dl (github version reqired). The basic idea is, that the 600+ modules of youtube-dl will only be loaded once instead of each time youtube-dl is used. Access time for web videos can be as fast as 2-4 seconds (depending on your internet connection) - about 2 seconds faster than with kodi's youtube-addon - and it does support more than 600 video websites. This works with the "Play" function from kweb's toolbar and also with omxplayerGUI's standalone interface. Starting and stopping the server can be managed from the youtube-dl section of the application page.<br><br>
+kwebhelper_set.py:<br>
+This program is used internally and manages kweb's environment. One of it's functions is to create HTML pages from simple text files (user editable :command pages, for example, or keyboard command pages). This has been greatly enhanced to support hidden commands, images, and a whole set of new directives. A complete description will be found in the new manual.<br>
+A few other functions have been added, especially for the keyboard command editor.<br><br>
+kwebhelper.py:<br>
+Improved handling of command links.<br><br>
+Others:<br>
+An improved and enhanced set of youtube-dl management scripts has been added.<br><br>
+<b>4) omxplayerGUI</b><br>
+The program has been renamed to "omxplayergui" and is now a binary compiled with nuitka.<br>
+The standalone interface has been expanded with playlist management functions: load, create and save your own m3u paylists. You can add multiple files at once or whole folders (including subfolders). You can play single files or the whole playlist.<br>
+In standalone mode, omxplayerGUI automatically starts the youtube-dl-server (if it is not already running) for faster web video access. This can be disabled on the settings page.<br>
+The standalone interface is not closed any more when playing media. It is also possible now to open multiple player windows from the standalone interface.<br><br>
+<b>5) Documentation</b><br>
+The kweb manual has been rewritten and enhanced. It now contains a few complete tutorials that will help users to extend the kweb environment and developers to create embedded applications.<br>
+The omxplayerGUI manual has been brought up to date.<br><br>
+<big style="font-weight: bold;">Version 1.6.9</big><br>
+This is the first Raspbian Jessie release. It will not work any more on Wheezy. It also fixes some crashs that could happen if you used version 1.6.8 in Jessie.<br>
+kweb now uses the new webkitgkt 2.4.8 engine, kweb3 the 2.4.1 webkit3 engine provided by the Foundation with GPU support for video and JPEG decoding. Both can be run with the same settings.<br>
+It's not possible to use the built-in update method from earlier versions. Version 1.6.9 has to be installed manually. For future Jessie versions you can use the update funktion again.<br><br>
+<b>Changes in kweb and kweb3</b><br>
+The options to set the cache size have been removed and the options "Q" and 'R have now a new meaning and also the "F" option:<br>
+"F": enable experimental options: webaudio, media-stream und media-source. I'm not sure, if they really work. The engine developers consider these options as experimental and "work in progress".<br>
+"Q": enable smooth scrolling. This is not HW accelerated and may be heavy on the CPU.<br>
+"R" Never open a new window in kiosk mode. This also prevents the "." keyboard shortcut from working. Links that request a new window simply don't work. No effect when you don't start the browser in kiosk mode.<br>
+Support for webgl and accelerated compositing has been disabled because it causes crashes of the webkit1 engine and doesn't work with the current webkit3 engine anyway.<br><br>
+<b>Changes in omxplayerGUI</b><br>
+Improved handling of m3u and pls playlist dowloads, which now also should work from cryptic URLs, if they send the correct mimetype.<br>
+Avoid the creation of temporary files for playlist downloads and in the html5 video extractor.<br><br> 
+<b>Changes in the default settings</b><br>
+In kwebhelper_settings.py and also in the default and nogui templates the youtube_dl_options have been preset to "-f best". This avoids getting separate streams for video and audio, which is now the default in youtube-dl.<br><br>
+<b>Known Issues</b><br>
+There's some strange effect, when you use the menu buttons in omxplayerGUI: if the menus pop downwards, they behave as before. If they pop upwards into the player window, you must keep the mouse button pressed, move to the desired option and then release the mouse button. I consider this a bug in the current TKinter implementation and cannot do anything about it at the moment.<br><br>
+<big style="font-weight: bold;">Version 1.6.8</big><br>
+Maintenance update fixes a bug in package creation.<br>
+Last Raspbian Wheezy release!<br><br>
+<big style="font-weight: bold;">Version 1.6.7</big><br>
+The most important changes regard the handling of new windows and the support of multiple processor cores on the RPi 2.<br><br>
+<b>kweb and kweb3</b><br>
+Now each new window uses its own webkitsettings object. This means that some settings are now local to that window.<br>
+The most important result is that enabling/disabling Javascript or the zoom method (full zoom or text zoom only) in one window won't change it in any other window. And it's also possible to use different user-agents or spellchecking languanges in different windows. When a new window is opened, it inherits its settings from the window, from which it was opened.<br>
+It's now also possible, to open a new window in a new browser instance. The webkit engine doesn't use multiple cores and so a long loading web page may block all other pages. Opening a new page in a new browser instance will need more memory, but the new browser window will use another processor core (on the RPi 2). Of course, this should be used sparingly, but it may help, if you want to open multiple websites at the same time.<br>
+If you click on a link, which requests to open a new window while holding the SHIFT key pressed, the new page will be opened in a new browser instance. It will use the same settings which were used when starting the original browser. (You can create bookmarks that open in a new window by using the "#!target=blank" option in the bookmarks text file.)<br>
+Unfortunately this is not possible when opening a page in a new window from the right click menu (the webkit engine never sends the signal I need in this case). Therefore I have implemented a workaround: pressing ALT+"." (new keyboard shortcut) will close the current window (if it's not the only one) and open it again in a new browser instance (if only one window is open, it won't be closed, but a new instance will be created nevertheless).<br>
+In either case opening a web page in a new browser instance won't take more than a second.<br><br>
+<b>kweb3</b><br>
+Hardware accelerated scrolling is now completely disabled. It simply caused to  many crashes. The "F" option has currently no meaning in kweb3.<br><br>
+<b>Changes in omxplayerGUI</b><br>
+A small bug fix in dbuscontrolm.sh has now made it possible to use a more refined volume control in omxplayerGUI. The old method will still be used when a video runs in full screen or refresh mode (using the keyboard commands '+' and '-') and give visual feedback via the OSD. In window mode both the audio and video player will directly set the new volume using dbus commands without any OSD from omxplayer.<br><br>
+<big style="font-weight: bold;">Version 1.6.6</big><br>
+Withdrawn because of frequent kweb3 crashes.<br><br>
+<big style="font-weight: bold;">Version 1.6.5</big><br>
+This maintenance update provides a few small changes and bug fixes:<br><br>
+kweb(3): It is now possible to create kiosk applications that never open a second browser window: start in kiosk mode and exclude "k" from the list of available keyboard commands. Links that ask for a new window simply don't work and also trying to open a new window from the right click popup menu is blocked. In all other cases a new window will be opened with controls enabled and in normal window mode (no fullscreen).<br>
+The meaning of the "N" options has slightly changed: it now prevents the browser from going full screen in kiosk mode (kiosk running within a window instead).<br>
+kweb3: auto-start playing videos is now allowed by default and can be switched off with the "O" option (new meaning!).<br><br>
+<b>Bug fixes and code optimizations:</b><br>
+A small fix in kwebhelper.py allows calling omxplayer directly from a command link without blocking.<br>
+Better handling of full screen toggling.<br>
+Default Cache Model is now set correctly.<br>
+Global webkit settings have been moved to a separate function (more efficient).<br><br>
+<big style="font-weight: bold;">Version 1.6.4</big><br>
+This update provides a few changes to omxplayerGUI.<br><br>
+Response to moving or resizing the video window has been made snappier.<br>
+When you click the "Mode:" or "Lines:" option menu, video display is set to half transparent for about two seconds. So the menus will remain visible even if they pop upwards into the video area.<br>
+Resolution of the seek bar is now much finer: 3 seconds instead of 30.<br>
+Two more keyboard shortcuts have ben added.<br>
+By default video windows are now started in maximized mode.<br>
+<b>Important note:</b> You need the latest version of omxplayer from http://omxplayer.sconde.net/ for everything to work correctly. Latest versions also fixed the small jumps inside a video when resizing or moving the video window and live TV streams don't stop any more when you move,resize or unhide the video window.<br><br> 
+<big style="font-weight: bold;">Version 1.6.3</big><br>
+This update provides a few changes to kweb3 and the :command editor (kwebhelper_set.py)<br><br>
+<b>Changes in kweb3</b><br>
+In earlier versions I had to disable some features of the new webkit3 engine to prevent bugs by setting some environment variables. As the latest updates of epiphany/webkit3 have fixed most of these bugs, these restrictions are not needed any more. In fact, kweb3 does run now with exactly the same settings as epiphany with one exception: fast scrolling is disabled by default (I prefer the WYSIWYG scrolling mode and don't like the flashing checkered background). But you can enable it with the experimental (F) option, if you like it.<br><br>
+The chapter "Configuring Kweb3 With Environment Variables" of the kweb manual is obsolete now (it also contained some errors, as I've recently learned).<br><br>
+Known bugs: kweb3 (and epiphany) may crash, if you move the slider in web videos to jump forward or backward.<br><br>
+<b>Changes to the :command editor</b><br>
+The third kind of command links introduced in version 1.6.2 is now also supported by the editor. If you include a line starting with<br>
+name=#....<br>
+a button or link will be created, that inserts the text following the '#' into the URL entry line and executes it (even if it is hidden in kiosk mode). With this option all URL line command types can be executed (e. g. web search, setting the spelling language or the user agent etc.).<br><br>
+The default application page has been extended and contains some useful examples (a number of user agent buttons, for example).<br>
+But the old application page will not be overwritten when you update kweb (in case you have modified it). To get the new application page, run the following commands after updating kweb:<br>
+sudo rm /usr/local/share/kweb/kweb_about_a.txt<br>
+sudo kwebhelper_set.py<br>
+If you have extended your application page, you should copy your changes first and add them again afterwards.<br><br>
+<big style="font-weight: bold;">Version 1.6.2</big><br>
+This update adds two new options, a third kind of command link and fixes a small bug.<br><br>
+<b>New options, available from the URL entry line:</b><br>
+&#38;URI<br>
+where URI is the full URI to a CSS file (e.g. file:///home/pi/my.css), will set this CSS file as user style. This will <b>not</b> override styles settings of a web page 
+(no style injection).<br>
+To disable it again, use &#38; without any argument.<br><br>
+$TEXT<br>
+will replace the user-agent by TEXT. You can use this to simulate another browser (and even a different computer or OS), if a web page rejects you because 
+you are using the "wrong browser", or to access the mobile version of a website. For example, the following entry<br>
+$Mozilla/5.0 (Android; Tablet; rv:34.0) Gecko/34.0 Firefox/34.0<br>
+will make kweb(3) look like the mobile version of Firefox.<br> 
+To reset your browser to its default user-agent again, enter "$" without any argument.<br><br>
+<b>New command link type</b><br>
+To make these settings (and also others like setting the spell checking language(s)) available as commands, kweb now supports a third kind of command link:<br>
+file:///homage.html?txt=SOMETEXT<br>
+as href argument of a link or as src argument of an iframe, will enter SOMETEXT into the URL entry line and execute it. For example, the following<br>
+file:///homage.html?txt=$Mozilla/5.0%20(Android;%20Tablet;%20rv:34.0)%20Gecko/34.0%20Firefox/34.0<br>
+will set the user-agent to mobile Android Firefox. All "%20" values are automatically converted to spaces.<br>
+As with all command links this will only work from local html files and requires the command execution (right most icon) to be enabled.<br><br>
+Bug fix:<br>
+"rtp://" URLs are now really enabled and will be sent to omxplayerGUI.<br><br>
+Finally the (very old) man page has been updated.<br><br>
+<big style="font-weight: bold;">Version 1.6.1</big><br>
+Bug fix release.<br>
+Fixed a problem with saving keyboard options from the browser configuration page.<br><br>
+<big style="font-weight: bold;">Version 1.6</big><br>
+This is a major new release, which means, that both manuals have been revised to include all changes since version 1.5. The kweb manual includes a lot more configuration and application examples now.<br><br>
+<b>Changes in kweb and kweb3</b><br>
+Added "Stop" (loading) button, keyboard shortcut ALT+s (redefined)<br>
+Icons rearranged, separator added between command and toggle buttons<br>
+Replaced "/" for page search with "=" (which includes a modification of keyboard shortcuts)<br>
+Better URL expansion in the URL entry field and from the command line:<br>
+Each URL that does not include "://" will be expanded. If it starts with a slash (full path), it will be extended by putting "file://" in front, otherwise "http://" will be used.<br>
+Better cooperation with lxappearance:<br>
+If option "S" (small icons) is not used, the icon size of kweb will depend on the settings in lxappearance.<br>
+In kweb3 this doesn't work, because lxappearance settings are not working correctly with GTK+3 applications since the latest dist-upgrade. Therefore double icon size will be used, if the "S" options is not set.<br>
+New function to save current web page including images, css etc. using wget with special options. Only available from the keyboard with ALT+c (redefined!)<br>
+When opening files whose names contain a question mark, it's replaced with %3F (wget creates such filenames when downloading web pages). Otherwise they would not be loaded.<br>
+User definable keyboard commands ALT+0 ... 9 are now enabled, if the folder  "~/kwebcontrol" exists. The new manual contains two complete examples of the necessary HTML files (for starting a program or opening a web page).<br>
+In kweb3 auto start of media files has been blocked (not possible in webkit1)<br><br>
+<b>Changes in omxplayerGUI</b><br>
+Support for new dbus function "Aspect" has been added. If you use a very recent omxplayer version, the "auto" mode of the "Mode:" menu will show a video with the correct aspect ratio, even if you started with another mode set.<br><br>
+<b>New utilities</b><br>
+Two new utility scripts to install and update a faster running version of youtube-dl from github have been added:<br>
+ginstall-ytdl<br>
+will remove older versions of youtube-dl, install git (if not installed already) and clone the current version from github.<br>
+update-ytdl<br>
+updates the github version and restores fast mode again, if it has been lost due to changes on github.<br><br>
+<big style="font-weight: bold;">Version 1.5.7</big><br>
+Installation method has changed again: now gdebi is used instead of dpkg. This will automatically install missing dependecies. If gdebi is not found, gdebi-core will be installed by the installation script debinstall.<br>
+The kiosk part has been completely rewritten. Formerly the user interface has not been created in kiosk mode at all, now it's always created, but hidden when the browser starts in kiosk mode. This has a lot of advantages:<br>
+1) You can always switch between kiosk mode (hide user interface) and full mode (show user interface) with the keyboard shortcut ALT+k (the meaning has changed!)<br>
+2) kweb(3) can now be completely controlled from xdotool, including pointing it to a new URL. This works only with matchbox-window-manager; OpenBox does not work correctly with xdotool's type command. I'll supply some examples on kweb's news page.<br>
+3) The code has become more compact (a lot of checks for kiosk mode are not needed any more).<br><br>
+There's a small change within omxplayerGUI: when it finishes, it checks for a file ~/.omxplayergui.run and deletes it. This can be used to check, if a video has stopped playing in presentation applications (your script is responsible for creating this file).<br><br>
+Bug fixes:<br>
+An error in the preparekweb script has been fixed.<br>
+Errors in the Makefile of the source distribution package have been fixed.<br><br>
+<big style="font-weight: bold;">Version 1.5.6</big><br>
+Only small changes, but now kweb is installed as a debian package. The new installation method also fixes missing dependencies on freshly installed Raspbian or NOOBs images. It check's if either kweb or Midori are installed on your system and if it doesn't find any one of them it will install a number of packages via apt-get first. Install the new version with:<br>
+./debinstall<br>
+(Don't call this with sudo!) This will also call a kwebprepare script afterwards, which is installed in /usr/local/bin.<br>
+The old installation scripts are still there, because they are needed for the automatic upgrade function, but they also use dpkg now.<br>
+Note that the .deb package file does not include all dependencies, but at least the most important ones. Nevertheless it should work out of the box on a standard Raspbian distribution. If you've stripped down your distribution it might not work any more (but it has always been that way).<br>
+To remove the package use "./remove" or "./removeall" (if you want to delete all settings and data files). Both use "dpkg -r" now.<br>
+The source code is available in a <a href="http://steinerdatenbank.de/software/kweb-1.5.6-src.tar.gz">separate download now</a>. There's now only one Makefile any more that creates both keb and kweb3. But the binaries are already included. Install from the souce distribution with:<br>
+sudo make install<br>
+To fix missing dependencies on a fresh Raspbian image, run<br>
+./installdeps<br><br>
+Known problem: If you are using a framebuffer size that doesn't match your physical screen size, omxplayerGUI will not work correctly. I can't change that.<br>
+Other small changes:<br>
+kweb, kweb3 and omxplayerGUI appear now in the Debian menu system (important if you use other Desktops like Awesome or run Openbox as desktop).<br>
+omxplayerGUI now supports song titles in m3u playlist files (if they use EXTM3U format).<br><br>
+<big style="font-weight: bold;">Version 1.5.5.1</big><br>
+Bug fix in omxplayerGUI, required after latest rpi-update<br><br>
+<big style="font-weight: bold;">Version 1.5.5</big><br>
+Small fixes for kweb3, omxplayerGUI, and check.py<br>
+<b>kweb3:</b><br>
+Javascript JIT (Just In Time compiler) is now enabled by default.<br>
+kweb3 can now be controlled by the same environment variables as epiphany, but uses different defaults:<br>
+WEBKIT_DISABLE_TBS=0<br>
+This enables fast scrolling, disabled in kweb3 (=1) because of problems with iframes.<br>
+WEBKIT_DISABLE_CAIRO_BUFFER_POOL=0<br>
+Disabled in kweb3 (=1) for smoother video playback<br>
+WEBKIT_DISABLE_DIRECT_PAINT=1<br>
+Makes video playback slower but could fix some video problems. Enabled (=0) in kweb3.<br>
+SC_useJIT=0<br>
+disables the Javascript JIT compiler. Now enabled (=1) by default in kweb3<br>
+The following options are enabled in kweb3 (=1) if you set the "F" (experimental) option in browser configuration. Setting them to "0" will disable them independantly from the option:<br>
+ENABLE_IMAGE_DECODING_WITH_OMX=1<br>
+means that OMX (i.e. the HW) is used for image decoding.<br>
+WEBKIT_OMX_IMAGE_RESIZE=1<br>
+means that resizing jpegs is done using the HW.<br>
+These functions still contain bugs and cause crashes.<br><br>
+<b>omxplayerGUI</b><br>
+Better support for modified dbus interface of newest omxplayer releases.<br>
+HTML5 video extractor (using the play button) now also works, if youtube-dl is missing.<br><br>
+<b>check.py, used by the prepare script:</b><br>
+On newest Raspbian, evince must be installed instead of evince-gtk<br>
+Alternate methods for installing youtube-dl, because the current Raspbian version is broken.
+<br><br>
+<big style="font-weight: bold;">Version 1.5.4.1</big><br>
+This is an emergency update to fix omxplayerGUI to work with newest omxplayer versions (the dbus interface call has been changed in version omxplayer_0.3.5~git20140914)<br> 
+If you reinstall an older version of omxplayer again, run:<br>
+sudo rm /tmp/*<br>
+from the commande line, before using this version. Otherwise omxplayerGUI will assume that you have the latest version installed and not run correctly.
+<br><br>
+<big style="font-weight: bold;">Version 1.5.4</big><br>
+<br>This update fixes a few problems of kweb3 or Minimal Kiosk Browser (GTK-3), which uses the new accelerated webkit engine introduced with the publication of the new "Web" = Epiphany-Browser by the foundation.<br>
+Bug fixes and other changes:<br>
+Avoid crashing when going to another web page, while a video is still playing within the browser.<br>
+Scrolling within iframes is working again.<br>
+Smoother, but slower scrolling without the flashing checkerboard<br>
+Slightly smoother video playback within the browser window<br>
+Javascript JIT is disabled by default<br><br>
+The "Experimental" (F) option has now a different meaning for kweb3 than for kweb. If it is set, the following features are enabled:<br>
+Javascript JIT (Just in time compiler)<br>
+Hardware decoding and hardware resizing of images. These are not considered completely stable and are therefore disabled in epiphany at the moment. Use these features on your own risk. They may lead to crashes or freezing your RPi (but you'll get rid of the slow loading of images in stripes).<br><br>
+I want to thank Marco Barisione for his support in adding tweaks and fixes.<br><br>
+<big style="font-weight: bold;">Version 1.5.3</big><br>
+<br>
+This update installs kweb3 as a second desktop application named "Minimal Kiosk Browser (GTK 3)". This is the version that uses the new, accelerated webkit library, which includes HW accelerated video inside the browser and some more enhancements. This new library has definitely still a lot of bugs and may even lead to crashes. I still consider this experimental.<br>
+There's one more difference compared to kweb: The "F" option (experimental settings) is enabled by default. Setting this option therefore has no effect.<br><br>
+<big style="font-weight: bold;">Version 1.5.2</big><br>
+<br>
+This is an emergency update! The decision of the foundation to leave Wheezy compatibility and upgrade a lot of packages has broken quite a number of things. I've decided to create a new version of Minimal Kiosk Browser that reverts back to gtk+2 and libwebkitgtk1. The icons in the toolbar look a bit different and the file select box when using the "Open" command isn't as nice as before, but kweb is fast again, supports 32bit true color mode and doesn't freeze and crash any more.<br>
+<br>I've added an experimental version version that uses the new libraries. It's named kweb3 and can only be called from the command line. Use it on your own risk and don't complain about it's bugs. These are not bugs of kweb, but of the new libraries it has to use. Maybe it works better, if you migrate to Jessie.
+<br><br>
+Source code for both versions is part of the download package and also a "makeall" script that creates both versions (kweb and kweb3).<br><br>
+<big style="font-weight: bold;">Version 1.5.1</big><br>
+<br>
+This is a small maintenance update. That means, that the manuals have not been changed. New options or changes are only documented in this changelog.<br><br>
+<span style="font-weight: bold;">1) Changes in kweb:</span><br>
+Support for spell checking is now enabled for all kinds of web text input. By default, your current system language will be used. You can change that at run time by entering a command like this in the URL entry field:<br>
+!en_US<br>
+(to switch to US English, for example). Multiple language support is also possible like this:<br>
+!en_US,de_DE<br>
+You must have the matching aspell/myspell/hunspell dictionaries installed; otherwise it won't work. Language codes are either two or three letter codes, optionally followed by an underscore and a country code (en, en_GB, en_US, de_LU etc.). Install enchant-lsmod and run:<br>
+enchant-lsmod -list-dicts<br>
+to get a list of available spell checking dictionaries on your system and their language codes.<br>
+There's also a matching new keyboard command<br>
+ALT+  !<br>
+which will empty the entry field, put a '!' in front and activate the field for further input.<br><br>
+New keyboard commands in Command mode<br>
+If "C" (= command execution option) is enabled when starting the browser (only possible from a script), ten new keyboard controls<br>
+(ALT+) 0 to (ALT+) 9<br>
+are automatically added. When  they are called, special html files are loaded:
+~/kwebcontrol/kweb0.html (and so on)<br>
+This way kweb can be controlled remotely (in a limited way) by using xdotool. It can also be used to start programs using keyboard shortcuts when using kweb as desktop replacement.<br><br>
+A news page (which comes from the internet) has beem added to the menu page. I'll use it for additional information and to offer some application examples for download.<br><br>
+<span style="font-weight: bold;">2) Changes in omxplayerGUI:</span><br>
+The option<br>
+omxplayer_in_terminal_for_video (when set to False)<br>
+can now also be used for web media (HTML5 and video supported by youtube-dl). This will allow embedded applications to run extracted web video in certain areas of the screen by using omxplayer's --win option in youtube_omxoptions(simulating web video inside a browser window).<br><br>
+When playing video the keyboard commands "," and "." can now be used for large jumps backwards and forward (in addition to PageUp and PageDown).
+<br><br>
+<big style="font-weight: bold;">Version 1.5</big><br>
+<br>
+<span style="font-weight: bold;">1) kweb</span><br>
+Support for new configuration options (cache control and more)<br>
+Download mode has been changed again to switch between using wget or
+the download manager uGet.<br>
+Added rtsp, rtmp and mmsh URL types (handled as media streams)<br>
+Added URLs of type file://~/, which will be expanded to the users home
+directory<br>
+Added browser (keyboard short cuts) commands to the command link
+execution interface<br>
+Command execution has now to be explicitely enabled by the user with a new toggle button.<br>
+By default the command execution is always disabled; enabling it at start is only possible with command line argument "C"<br>
+Added the evaluation of ":commands" from the text entry field<br>
+Added more keyboard commands (and changed a few)<br>
+Keyboards commands are now enabled by default without setting them on
+the command line<br>
+Added support for a browser configuration file, which will be used when
+started with no command line arguments<br>
+Enhanced security for the command link interface<br>
+Helper support is now split between kwebhelper and omxplayerGUI.<br>
+Cleaned up the code a lot, added white space for better readability<br>
+<br>
+<span style="font-weight: bold;">2) kwebhelper.py</span><br>
+All media support has been removed (to a separate application)<br>
+In the PDF section support for evince has been added, which is now the
+preferred PDF reader<br>
+In the download section support for uGet has been added.<br>
+The comand interface has now no Python process overhead any more when
+running other applications<br>
+Added internal commands for browser configuration management<br>
+Added program update from the internet<br>
+<br>
+<span style="font-weight: bold;">3) omxplayergui.py</span><br>
+This is a new application, which contains all the media handling
+formerly done by kwebhelper<br>
+It adds a GUI for playing video<br>
+It is also installed and can be used as a standalone media player<br>
+It has its own manual<br>
+<br>
+<span style="font-weight: bold;">4) kwebhelper_settings.py</span><br>
+Reorganized<br>
+A few settings changes, a lot added for the video part of omxplayerGUI<br>
+The comment lines have been modified, so they can be used for creating
+a settings web page.<br>
+<br>
+<span style="font-weight: bold;">5) ḱwebhelper_set.py</span><br>
+This is a new application to manage settings files and user editable
+content<br>
+Runs as root, as it has to modify files in the protected part of the
+file system<br>
+<br>
+<span style="font-weight: bold;">6) dbuscontrolm.sh</span><br>
+A shell script to send dbus commands to different instances of omxplayer<br>
+Extended and modified version of a script from omxplayer github<br>
+<br>
+<span style="font-weight: bold;">7) Documentation</span><br>
+Split into 3 documents now:<br>
+This changelog html page<br>
+Kweb Manual (a complete rewrite)<br>
+OmxplayerGUI manual<br>
+<br>
+<span style="font-weight: bold;">8) and more ...</span><br>
+New prepare, install and remove files<br>
+A number of static web pages for system management<br>
+ktop file for easy use from the command line and as desktop replacement<br>
+<br>
+
+<big><span style="font-weight: bold;">Version 1.4</span></big><br>
+
+<br>
+
+<span style="font-weight: bold;">1) New toggle button in the task bar: </span><br>
+
+Use Omxplayer <br>
+
+By default, this is enabled. If you disable it, kweb will try to play
+audio and video files and streams directly within the browser, using
+the gstreamer-library that libwebkit supports. Currently this will only
+work with some audio formats. Future webkit libraries, using
+gstreamer-1.0 with OpenMax support, may also play video with HW
+acceleration. <br>
+
+<br>
+
+<span style="font-weight: bold;">2) New audio player GUI for playing
+audio files and playlists containing only audio files with omxplayer: </span><br>
+
+"omxaudioplayer" has 6 buttons (play/pause, stop, rewind (about 10sec),
+forward (about 10 seconds), previous and next song), a volume slider,
+and a scrollable playlist window (for larger playlists). <br>
+
+Keyboard controls: <br>
+
+Space,Return or Enter to play/pause, ESC or q to stop, ← = rewind, → =
+forward, ↑ = previous, ↓ = next, + and - for volume control.<br>
+
+<br>
+
+<span style="font-weight: bold;">3) New (optional) keyboard commands
+(usually with ALT+): </span><br>
+
+q = stop any running omxplayer instance <br>
+
+x = enable omxplayer for audio and video <br>
+
+y = disable omxplayer for audio and video <br>
+
+<br>
+
+<span style="font-weight: bold;">4) New or modified command line
+options </span><br>
+
+F = Disable plugins and other exotic stuff (now enabled by default,
+CHANGED!) <br>
+
+Y = Disable the use of omxplayer upon start (by default enabled) <br>
+
+<br>
+
+x,y,q for new keyboard controls (see above) <br>
+
+<br>
+
+<span style="font-weight: bold;">5) New or modified options in
+kwebhelper(_settings).py </span><br>
+
+<br>
+
+The option "playaudioinbackground" is gone. It has been replaced by a
+few new options. <br>
+
+"omxoptions" will now be used only for playing video files or streams. <br>
+
+omxplayer_in_terminal_for_audio = True <br>
+
+if set to "False", audio can be played completely in background,
+without starting a terminal or a player GUI, depending on other
+settings (see below). To play audio on a web page automatically,
+include an (invisible) iframe, whose "src" points to an audio file or
+playlist. <br>
+
+<br>
+
+omxplayer_in_terminal_for_video = True <br>
+
+if set to "False", video can be played completely in background,
+without starting a terminal first. You can then also use omxplayer's
+"-win" to simulate video playing inside the browser window. For full
+screen video you should use the "-b" option. Keyboard control of
+omxplayer is not possible then, but omxplayer can be stopped with ALT+q
+(if enabled on the command line). To automatically play video on a web
+page, include an (invisible) iframe, whose "src" points to a video file
+or playlist. <br>
+
+<br>
+
+try_stream_as_audio = False <br>
+
+Normally stream links that don't have a file extension are handled as
+video by kweb. If you set this to "True", they will be handled as audio
+streams and use the audio settings. If the stream is a video stream
+will still be played as such, but using audio settings and maybe even
+the omxaudioplayer GUI. I added this option, because quite a number of
+m3u(8) files lists from web radio servers contain such streams. You
+should only set this to "True", if you want to play such audio streams
+inside a terminal or omxaudioplayer. <br>
+
+<br>
+
+videoextensions <br>
+
+This is a list of video file type extensions. It's only used for
+counter checking, if you set "try_stream_as_audio" to "True" <br>
+
+<br>
+
+useAudioplayer = True <br>
+
+If this is "True" (default), audio files and playlists containing only
+audio files will be played inside the new "omxaudioplayer" GUI. The
+setting "omxplayer_in_terminal_for_audio" will have no effect in this
+case. If this is set to "False", audio will be played inside a terminal
+or completely in background, if "omxplayer_in_terminal_for_audio"&nbsp;
+is set to "False". <br>
+
+One more thing: if "useVLC" is set to "True", all other audio options
+don't matter; VLC will be used to play audio (playlists) in this case. <br>
+
+<br>
+
+omxaudiooptions = [] <br>
+
+This list of omxplayer options (empty by default) will be used for all
+kinds of audio playback (except when using VLC). To use "pass through",
+for example, set it to ['-p']. <br>
+
+<br>
+
+defaultaudiovolume = 0 <br>
+
+volume setting when starting omxaudioplayer ranging from -20 to 4 ( -60
+to +12 db) <br>
+
+<br>
+
+autoplay = True <br>
+
+autofinish = True <br>
+
+start playing and close after playing last song automatically (if
+"True", set to "False" to disable) <br>
+
+fontname= 'SansSerif'<br>
+
+Font to be used for playlist and interface<br>
+
+fontheight = 12 <br>
+
+font size, value between 10 and 22, will also determine the size of the
+GUI window <br>
+
+maxlines = 8 <br>
+
+number of entries displayed in playlist window of omxaudioplayer at the
+same time; value between 5 and 25 <br>
+
+lwidth = 40<br>
+
+Minimal width of playlist entries in characters (usually much more are
+displayed); value between 40 and 80.<br>
+
+<br>
+
+youtube_omxoptions = [] <br>
+
+These is also a list of omxplayer options, to be used for all kinds of
+"web video", to be played when you click the "Play" buttons in the
+toolbar; this includes HTML5&nbsp; video tags inside a web page and all
+websites using flash player, which are supported by youtube-dl. If you
+want to use the same options as with "normal" video (files or stream
+links) you can set it to: <br>
+
+youtube_omxoptions = omxoptions<br>
+
+<br>
+
+<big><span style="font-weight: bold;">Version 1.3</span></big><br>
+
+<br>
+
+1) Ported to GTK+3 <br>
+
+kweb has been ported from GTK+2 to GTK+3 now. You won't notice a big
+difference (from the outside); some icons had to be exchanged and the
+file select box for the new "Open file" command looks and works much
+better now. But in the future that will help with things like Wayland
+support (the newest versions of GTK+3 and libwebkit have at least some
+support for Wayland built in). <br>
+
+<br>
+
+2) New function and toolbar icon: "Open file" <br>
+
+Will open a file select box and if you have selected a file, it will be
+opened, if possible: <br>
+
+HTML, Text, JPEG, PNG, GIF files will be opened and displayed inside
+the browser <br>
+
+Audo and video files and m3u or pls playlists will be opened and run
+with omxplayer <br>
+
+PDF files will be opened with either xpdf or mupdf <br>
+
+If the "X" flag is set in a command line options string, executable
+files will be executed <br>
+
+Keyboard command: (ALT+) o <br>
+
+<br>
+
+3) New toggle button in the toolbar to switch between full zoom mode or
+text zoom only, which is now the default. The background of this new
+setting is the fact, that webkit gets extremely slow (by a factor of
+about 10), if full zoom mode is enabled, zoom is not set to 100% and
+the web page contains color runs. <br>
+
+There is another side effect (on purpose): if you open a page in a new
+window, it is opened with 100% zoom, if full zoom is enabled, but in
+the current zoom setting of the old window, when it's disabled. This
+should prevent your system from freezing for a long time (often 10 to
+20 seconds) when opening new browser windows. <br>
+
+Keyboard commands to switch: (ALT+) "g" (full zoom) or "t" (text zoom
+only). <br>
+
+<br>
+
+4) Two different download methods to choose from with a new toolbar
+icon <br>
+
+a) internal download method of webkit (default). If you start a
+download, a message like "downloading: file name" will appear in the
+URL entry field. This method supports all kinds of cookies including
+session cookies. Files are always downloaded to the "Downloads" folder
+inside the user's home directory. <br>
+
+b) external download using wget (icon activated). Cookies are
+supported, but no session cookies. The download can be run in a
+terminal window to control its progress (depending on a setting in
+kwebhelper_settings.py). Files are downloaded to the "Downloads" folder
+inside the "homedir" defined in kewebhelper_settings (default is also
+the Downloads folder inside the user's home directory). <br>
+
+Keyboard commands to switch: (ALT+) "w" (wget) or "i" (internal). <br>
+
+Downloads can only be started from the right click menu! <br>
+
+<br>
+
+5) The toolbar icons have been arranged in a new order: the "Play"
+button is placed left of the zoom buttons, so that all zoom functions
+(4 now) are grouped together. <br>
+
+<br>
+
+6) startpage.com is now the default search engine, if starting a search
+from the URL entry line (with a "?" in front). startpage.com uses
+google search but prevents google from getting any information about
+you. I wanted to do this all along, but the damned colour run on the
+startpage.com website used to slow it down terribly. For this reason,
+full zoom is deactivated automatically, when you start a search and
+zoom is not set to 100%. Searching on Google directly instead can be
+enabled by adding "G" to a command line options string. <br>
+
+<br>
+
+7) Support of embedded videos (HTML5 or flash players on all websites
+supported by youtube-dl) works without any fifo buffer now.&nbsp;
+Youtube-dl is still needed to extract the URLs, but omxplayer now plays
+the videos directly from those URLs. This approach works with some
+websites which didn't work before and it avoids buffering on the SD
+card. Youtube videos (only) seem to start later, but this is an
+illusion because omxplayer is started at a later time (less time to
+wait on a dark screen). <br>
+
+<br>
+
+8) Support for PLS playlists (radio stations mostly) has been added. <br>
+
+<br>
+
+9) Not only playlists containing only audio files but also single audio
+files can be played "in background" now (this is the default setting in
+kwebhelper), which means that omxplayer does not take over the screen.
+A terminal window is opened in which you can control omxplayer with
+keyboard commands, but you can put that in the background, of course,
+and listen to some music while you are doing something else. And
+optionally VLC can be used for that. <br>
+
+10) Javascript, cookies, full zoom and external downloads using wget
+are now disabled by default. They can be enabled at run time with the
+toggle buttons in the toolbar or with keyboard commands. They can also
+be enabled by command line flags in the options string. <br>
+
+11) The options string as first argument on the command line (starting
+with a "-") now uses capital letters for global options and lower case
+characters to enable keyboard commands and numbers for default window
+size (new!). As there have been lots of changes, check chapter 6 of
+this manual for details. All kiosk files you may have been using with
+earlier versions, have to be modified! <br>
+
+<br>
+
+12) Extended command interface <br>
+
+Until now, commands could be executed from the browser either from the
+URL entry line putting a "#" in front or with special command links
+using the form: <br>
+
+href="file///homepage.html?cmd=cmdline", where is "cmdline" is the
+command line to be executed. Spaces have to be escaped with "%20". Some
+things were not possible with such links (URLs or file paths containing
+spaces as arguments, for example). And user selectable options were
+also not possible. <br>
+
+<br>
+
+Now kwebhelper.py supports commands coming from form elements inside a
+HTML file, if they follow certain rules. <br>
+
+The form must start with: <br>
+
+&lt;form accept-charset="utf-8"
+enctype="application/x-www-form-urlencoded" method="get"
+action="file:///homepage.html" name="anyname"&gt; <br>
+
+the first form element must be named "cmd" and begin with "formdata": <br>
+
+&lt;input name="cmd" value="formdata" type="hidden"&gt; <br>
+
+Form elements whose names start with "quoted" result in quoted
+arguments <br>
+
+Form elements whose names start with "dquoted" result in quoted
+arguments using double quotes <br>
+
+Submit buttons should not have a name. <br>
+
+<br>
+
+The default_homepage.html file contains a simple example, which plays
+video in a small window area.<br>
+
+<br>
+
+Two new options for command execution have been added in kwebhelper.py
+(see above). Now most GUI applications are detected automatically and
+are not run from a terminal without adding them to the direct_commands
+list. And optionally a script may be generated to execute a command to
+reduce the memory overhead of the Python interpreter for each
+application started from kweb (disabled by default, to avoid too many
+disk accesses).<br>
+
+<br>
+
+13) The settings part of kwebhelper.py and kwebhelper_settings.py have
+been reorganized into subsections and a few new options have been added
+(and a few others removed). Use <br>
+
+sudo idle /usr/local/bin/kwebhelper_settings.py <br>
+
+to edit the settings (at run time) <br>
+
+All options are commented, quite a number can be set by commenting or
+commenting out the provided examples. Here is a list of the new options
+(for more details see chapter 8 of this manual): <br>
+
+<br>
+
+AUDIO VIDEO OPTIONS <br>
+
+# special options for watching live TV streams (requires omxplayer 0.32
+or later) <br>
+
+omx_livetv_options = ['--live'] <br>
+
+# add the start of your live TV stream links to this list to enable
+live TV options <br>
+
+live_TV = [] <br>
+
+# like this: <br>
+
+#live_TV = ['http://192.168.0.5:9082'] <br>
+
+# set this to False, if you want to allow more than one omxplayer
+instance <br>
+
+kill_omxplayer = True <br>
+
+<br>
+
+COMMAND EXECUTION OPTIONS <br>
+
+Some terminal programs seem to have problems with double quoted
+arguments following the -e (execute) option. Here you have the choice
+to run all commands coming from formdata without opening a terminal
+first. <br>
+
+formdata_in_terminal = False <br>
+
+#formdata_in_terminal = True <br>
+
+<br>
+
+DOWNLOAD OPTIONS <br>
+
+If you use the external download method with wget, you may want to see
+what is happening, especially with large downloads: <br>
+
+show_download_in_terminal = True <br>
+
+#show_download_in_terminal = False <br>
+
+<br>
+
+ONLINE VIDEO OPTIONS <br>
+
+# Choose, if HTML5 URL extraction is tried first (it's faster) and
+youtube-dl extraction afterwards or vice versa <br>
+
+html5_first = True <br>
+
+#html5_first = False <br>
+
+#additional youtube-dl options, e. g. selecting a resolution or file
+format <br>
+
+youtube_dl_options = [] <br>
+
+#youtube_dl_options = ['-f','37/22/18'] <br>
+
+<br>
+
+14) A few small bugs and side effects have been fixed. The state of the
+toggle buttons is now set if you call the respective keyboard commands
+and they are also synchronized between different browser windows. And
+the annoying text messages in the terminal window when starting (web)
+videos has been made invisible.<br>
+
+<br>
+
+<big><span style="font-weight: bold;">Version 1.2</span></big><br>
+
+<br>
+
+I've included an extractor for videos embedded into HTML5 tags. Usually
+libwebkit will try to play such videos, but far too slow. Clicking on
+the "Play" icon will now extract the video source links and play the
+video(s) full screen with omxplayer. <br>
+
+I've also enabled the"spacial navigation" feature of webkit, which
+provides fast navigation through form elements or links with the arrow
+keys. In embedded applications this can be used to control the browser
+content with an ir remote control (which has to issue key strokes). To
+make that visible on links, the focus style has to be set. <br>
+
+<br>
+
+There are four new command line options: <br>
+
+<br>
+
+'x' - use argument 2 as your homepage (bound to the "home" button).
+This can be a file:// or http:// link. If you create a script (or
+kiosk) file, that contains <br>
+
+kweb -x http://myhomepagelink <br>
+
+the browser will open that page when it starts and always return to it,
+when you click the "home" button. The command links won't work, if you
+connect to a server, because they can only be used from file links (but
+see below). <br>
+
+<br>
+
+'z' - disable private browsing (which is by default enabled in Minimal
+Kiosk Browser) <br>
+
+<br>
+
+The last two options are very special ones, only to be used in kiosk
+mode: <br>
+
+<br>
+
+'n' - kweb can be used without a window manager; screen size is hard
+coded to 1920x1080 then. Not all options work as expected (keyboard
+control of omxplayer, for example), so this is only useful for special
+applications. <br>
+
+<br>
+
+'l' - use the command links from a server running on localhost (only
+useful in combination with the x option). For example <br>
+
+kweb -k...xl http://localhost:8080/ <br>
+
+will use this link as homepage and support command links of the form
+'&lt;a href=http://localhost:8080/homepage.html?cmd=top" (to run the
+top command inside a terminal). This is risky from a security aspect
+and is only recommended for very special embedded applications.<br>
+
+<br>
+
+<big><span style="font-weight: bold;">Version 1.1</span></big><br>
+
+<br>
+
+Two more toolbar icons: “Reload page” and “Enable/Disable Cookies”<br>
+
+<br>
+
+Tooltips on all toolbar icons<br>
+
+Icon labels are now visible when started from Raspbian desktop<br>
+
+<br>
+
+Different handling of videos embedded in web pages; it now supports all
+websites that can be accessed by youtube-dl (and not only youtube); it
+does not reload the page any more.<br>
+
+Command line now supports up to two arguments (options string and URL)<br>
+
+<br>
+
+More options and keyboard commands:<br>
+
+interface options for the toolbar (icons and icon size, labels)<br>
+
+two different characters for switching Javascript or Cookie support on
+and off, instead of toggling them.<br>
+
+<br>
+
+Support for calling programs (defined in kwebhelper_settings) as root
+(sudo) without opening a terminal<br>
+
+<br>
+
+Separate settings file for kwebhelper.py, that can be edited at runtime
+(changing the settings does not require a new install any more)<br>
+
+<br>
+
+Added homepagecreator.py script to create a homepage.html file with
+example configuration text files (in separate compressed tools folder)<br>
+
+<br>
+
+Readme file has been replaced by this manual<br>
+
+<br>
+
+<big style="font-weight: bold;">Version 1.0<br>
+</big><br>
+
+Initial relase.<br>
+
+<br>
+
+</body></html>

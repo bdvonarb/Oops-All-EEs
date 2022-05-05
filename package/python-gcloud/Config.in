@@ -1,0 +1,11 @@
+config BR2_PACKAGE_PYTHON_GCLOUD
+	bool "python-gcloud"
+	select BR2_PACKAGE_PYTHON_GOOGLEAPIS_COMMON_PROTOS # runtime
+	select BR2_PACKAGE_PYTHON_HTTPLIB2 # runtime
+	select BR2_PACKAGE_PYTHON_OAUTH2CLIENT # runtime
+	select BR2_PACKAGE_PYTHON_PROTOBUF # runtime
+	select BR2_PACKAGE_PYTHON_SIX # runtime
+	help
+	  API Client library for Google Cloud.
+
+	  https://github.com/GoogleCloudPlatform/gcloud-python

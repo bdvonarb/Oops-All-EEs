@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<title>:o - OmxplayerGUI Frontend</title>
+<link rel="stylesheet" type="text/css" href="file:///usr/local/share/kweb/about.css">
+</head><body>
+<h2>OmxplayerGUI Web Frontend</h2>
+<b>Use the "Open File" button in the toolbar to open audio or video files
+or playlists.</b><br>
+<hr>
+<b>Play video, audio streams or playlists from the web:</b><br>
+<form accept-charset="utf-8" enctype="application/x-www-form-urlencoded" method="get" action="file:///homepage.html" name="playurl">
+<input name="cmd" value="formdata" type="hidden">
+<input name="p" value="omxplayergui" type="hidden">
+<input name="m" value="av" type="hidden">
+URL:  <input name="quotedurl" type="text" size="40" value="">
+<input value="Play" type="submit"></form>
+<hr>
+<b>Extract video from web page (HTML5 or all web sites supported by youtube-dl) :</b><br>
+<form accept-charset="utf-8" enctype="application/x-www-form-urlencoded" method="get" action="file:///homepage.html" name="playurl">
+<input name="cmd" value="formdata" type="hidden">
+<input name="p" value="omxplayergui" type="hidden">
+<input name="m" value="ytdl" type="hidden">
+URL:  <input name="quotedurl" type="text" size="40" value="">
+<input value="Extract" type="submit"></form>
+<hr>
+<a target="_top" href="file:///usr/local/share/kweb/kweb_about_s.html#1"><button>Open omxplayerGUI settings</button></a> &nbsp;
+<a href="file:////usr/local/share/kweb/omxplayerGUI_manual.pdf"><button>Open the manual</button></a>
+<hr>
+<h3>Special OmxplayerGUI Keyboard Controls</h3>
+<table><tr>
+<td><b>Key</b></td><td><b>Mode</b></td><td><b>Action</b></td></tr>
+<td>ALT c, q</td><td>any</td><td>quit player</td></tr><tr>
+<td>ALT k</td><td>playing</td><td>kill omxplayer instance, when blocking</td></tr><tr>
+<td>ALT m</td><td>any</td><td>toggle window between max and min</td></tr><tr>
+<td>ALT f</td><td>any</td><td>toggle window between full and max</td></tr><tr>
+<td>ALT 0</td><td>any</td><td>window min size</td></tr><tr>
+<td>ALT 1...9</td><td>any</td><td>other window sizes</td></tr><tr>
+<td>ALT s</td><td>playlist</td><td>save playlist</td></tr><tr>
+<td>ALT u</td><td>playlist</td><td>toggle between simple (f) and extended mode</td></tr><tr>
+<td>ALT h</td><td>any</td><td>hide / unhide controls</td></tr><tr>
+<td>ALT a</td><td>playlist</td><td>set “Mode:” (aspect ratio) to “auto”</td></tr><tr>
+<td>ALT KP+, PgUp</td><td>playlist</td><td>layer number + 1</td></tr><tr>
+<td>ALT KP-, PgDown</td><td>playlist</td><td>layer number - 1</td></tr><tr>
+<td>ALT +</td><td>any</td><td>next Mode: (aspect ratio)</td></tr><tr>
+<td>ALT -</td><td>any</td><td>previous Mode: (aspect ratio)</td></tr>
+</table><br>
+<h3>Omxplayer(GUI) Keyboard Controls (Play Mode)</h3>
+OmxplayerGUI uses almost the same keyboards commands as omxplayer<br>
+<table><tr>
+<td><b>Omxplayer</b></td><td><b>GUI</b></td><td><b>Action</b></td></tr>
+<td>1</td><td>1</td><td>decrease speed</td></tr><tr>
+<td>2</td><td>2</td><td>increase speed</td></tr><tr>
+<td>&lt;</td><td>&lt;</td><td>rewind</td></tr><tr>
+<td>&gt;</td><td>&gt;</td><td>fast forward</td></tr><tr>
+<td>z</td><td>z</td><td>show info</td></tr><tr>
+<td>j</td><td>j</td><td>previous audio stream</td></tr><tr>
+<td>k</td><td>k</td><td>next audio stream</td></tr><tr>
+<td>i</td><td>i</td><td>previous chapter</td></tr><tr>
+<td>o</td><td>o</td><td>next chapter</td></tr><tr>
+<td>n</td><td>n</td><td>previous subtitle stream</td></tr><tr>
+<td>m</td><td>m</td><td>next subtitle stream</td></tr><tr>
+<td>w</td><td>w</td><td>show subtitles</td></tr><tr>
+<td>x</td><td>x</td><td>hide subtitles</td></tr><tr>
+<td>s</td><td>s</td><td>toggle subtitles</td></tr><tr>
+<td>d</td><td>d</td><td>decrease subtitle delay (- 250 ms)</td></tr><tr>
+<td>f</td><td>f</td><td>increase subtitle delay (+ 250 ms)</td></tr><tr>
+<td>q</td><td>q, Esc</td><td>exit omxplayer</td></tr><tr>
+<td>p, space</td><td>p, space, Return, Enter</td><td>pause/resume</td></tr><tr>
+<td>-</td><td>-, KP-</td><td>decrease volume</td></tr><tr>
+<td>+, =</td><td>+, KP+</td><td> increase volume</td></tr><tr>
+<td>left arrow</td><td>left arrow</td><td> seek -30 seconds</td></tr><tr>
+<td>right arrow</td><td>right arrow</td><td>seek +30 seconds</td></tr><tr>
+<td>down arrow</td><td>PgDown, ","</td><td>seek -600 seconds</td></tr><tr>
+<td>up arrow</td><td>PgUp, .</td><td>seek +600 seconds</td></tr><tr>
+<td></td><td>up arrow</td><td>previous playlist item</td></tr><tr>
+<td></td><td>down arrow</td><td>next playlist item</td></tr>
+</table>
+</body></html>

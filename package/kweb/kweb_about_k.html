@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=UTF-8" http-equiv="content-type">
+ <link rel="stylesheet" type="text/css" href="file:///usr/local/share/kweb/about.css">
+<title>About Minimal Kiosk Browser</title></head><body>
+<h2>About Minimal Kiosk Browser (kweb and kweb3)</h2>
+<h3>Version 1.7.0 for Raspbian Jessie</h3>
+Kweb is a slim and efficient web browser based on webkit, written especially for the Raspberry Pi. It offers:<br>
+<ul>
+  <li>HTML5 support</li>
+  <li>PDF support via Evince, Xpdf or Mupdf</li>
+  <li>asynchronous download using wget or the download manager uget</li>
+  <li>full media support (audio, video, playlists) using omxplayer</li>
+  <li>omxplayerGUI, a window based frontend for omxplayer</li>
+  <li>web media support for HTML5 video or for websites supported by youtube-dl</li>
+  <li>opening HTML, text and PDF documents, images (GIF, JPG, PNG) and all kinds of media directly from your file system</li>
+  <li>a special command interface, which supports calling any kind of program from inside an html file</li>
+  <li>lots of different fine tuning options</li>
+  <li>a menu and a control panel page to access all configuration options in one place<br>
+ <li>Support for the new hardware accelerated webkit3 engine in kweb3<br>
+  </li>
+</ul>
+Kweb can be used<br>
+<ol>
+  <li>as a browser for your desktop</li>
+  <li>to replace your desktop completely</li>
+  <li>as frontend for embedded applications (kiosk mode)</li>
+</ol>
+To use it as a desktop replacement, install tint2, boot to the command line and run:<br>
+xinit ./ktop<br>
+<br>
+You can create your own homepage.html file in /usr/local/share/kweb and it will be used instead of the kwebmanu page.<br>
+You can also set any website or local html file as your homepage.<br>
+<br>
+For everything else, check the manual (always available from the menu page).<br>
+<br>
+Components:<br>
+<ul>
+  <li>kweb & kweb3 - the browsers</li>
+  <li>kwebhelper.py - the glue to other programs (PDF, download and the command interface)</li>
+  <li>omxplayergui.py - manages omxplayer with a GUI or in full screen mode, can also be used as a standalone media player.</li>
+  <li>kwebhelper_settings.py - global settings for kwebhelper and omxplayerGUI</li>
+  <li>kwebhelper_set.py - settings manager and HTML page generator.</li>
+  <li>kweb_bookmark.py - utility to add bookmarks (GUI).</li>
+  <li>kweb_edit.py - utility to edit kweb's text files used for creating HTML pages (GUI).</li>
+  <li>ytdl_server.py - youtube-dl application server.</li>
+  <li>Some utility scripts to manage youtube-dl.</li>
+</ul>
+external programs needed or recommended:<br>
+<ul>
+  <li>omxplayer - GPU accelerated media player</li>
+  <li>youtube-dl - extracts web video links from many video websites</li>
+  <li>xterm - simple terminal, used in the nogui preset</li>
+  <li>lxterminal - the default terminal</li>
+  <li>evince, xpdf or mupdf - PDF viewer</li>
+  <li>wget - command line downloader (required)</li>
+  <li>uget-gtk - download manager with a GUI</li>
+  <li>tint2 - simple taskbar (only for desktop replacement example)</li>
+</ul>
+<hr>
+kweb and its helper programs are free and open source software, published under the GNU licence.
+<br>© 2013-2016 by Günter Kreidl
+</body></html>

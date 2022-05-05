@@ -1,0 +1,5 @@
+# md5, sha256 from https://pypi.org/pypi/whichcraft/json
+md5  5924f9a56203badb3b7dd5ce3b823069  whichcraft-0.6.1.tar.gz
+sha256  acdbb91b63d6a15efbd6430d1d7b2d36e44a71697e93e19b7ded477afd9fce87  whichcraft-0.6.1.tar.gz
+# Locally computed sha256 checksums
+sha256  9fbd51a4ad088b99011438956d36b3b9cd3098aa9d6b326675637804960b60df  LICENSE

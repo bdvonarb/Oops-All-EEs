@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PYTHON_V
+	bool "python-v"
+	help
+	  A placeholder for a future project.
+
+	  

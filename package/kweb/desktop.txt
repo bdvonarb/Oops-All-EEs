@@ -1,0 +1,212 @@
+@ kweb desktop example page
+@ Tutorial: Kweb Manual, chapter 14. c)
+
+#!mode=mixed
+#!spacer=
+#!target=top
+#!pagetitle=Desktop
+#!css=about.css
+#!imgh=48px
+#!table=1:10:100%:100%:5:top:center
+#!next
+
+@elements of column 1
+#!title=File Manager
+/usr/share/icons/Adwaita/48x48/apps/system-file-manager.png=pcmanfm
+#<br><small>File Manager</small><br>
+#<br>
+
+#!title=Application Manager
+/usr/share/icons/Adwaita/48x48/categories/applications-other.png=pcmanfm menu://applications/
+#<br><small>Applications</small><br>
+#<br>
+
+#!title=Terminal
+/usr/share/icons/Adwaita/48x48/apps/utilities-terminal.png=lxterminal
+#<br><small>Terminal</small><br>
+#<br>
+
+#!title=Text Editor
+/usr/share/icons/Adwaita/48x48/apps/accessories-text-editor.png=leafpad
+#<br><small>Editor</small><br>
+#<br>
+
+#!title=Toggle Kiosk Mode
+/usr/share/icons/Adwaita/48x48/apps/preferences-desktop-display.png=?k
+#<br><small>Toggle Kiosk</small><br>
+#<br>
+
+#!title=Toggle Fullscreen
+/usr/share/icons/Adwaita/48x48/actions/view-fullscreen.png=?f
+#<br><small>Fullscreen</small><br>
+#<br>
+
+#!title=Edit Desktop
+/usr/share/icons/Adwaita/48x48/apps/preferences-desktop-theme.png=gksudo "kweb_edit.py -f=14 desktop.txt"
+#<br><small>Edit Desktop</small><br>
+#<br>
+
+#!next
+@elements of column 2
+#!title=Open Root as Root
+/usr/share/icons/Adwaita/48x48/places/folder.png=gksudo pcmanfm /
+#<br><small>Root</small><br>
+#<br>
+
+#!title=Downloads
+/usr/share/icons/Adwaita/48x48/places/folder-download.png=pcmanfm Downloads
+#<br><small>Downloads</small><br>
+#<br>
+
+#!next
+@elements of column 3
+#!title=OmxplayerGUI Standalone
+/usr/share/pixmaps/omxplayergui.png=omxplayergui
+#<br><small>OmxplayerGUI</small><br>
+#<br>
+
+&#!title=VLC Media Player
+&/usr/share/icons/hicolor/48x48/apps/vlc.png=vlc
+&#<br><small>VLC</small><br>
+&#<br>
+
+&#!title=Kodi Media Player
+&/usr/share/kodi/media/icon48x48.png=startkodi
+&#<br><small>Kodi</small><br>
+&#<br>
+
+#!next
+@elements of column 4
+#!title=Kweb Full Power Browser
+/usr/share/pixmaps/minimalkioskbrowser.png=kweb -ZJEHPBFQ5+-zbhrqfpoklgtjneduwxyavcsmi#?!., file:///usr/local/share/kweb/kweb_about_m.html
+#<br><small>Kweb</small><br>
+#<br>
+
+#!title=Kweb3 Full Power Browser
+/usr/share/pixmaps/minimalkioskbrowser.png=kweb3 -ZJEHPBFQ5+-zbhrqfpoklgtjneduwxyavcsmi#?!., file:///usr/local/share/kweb/kweb_about_m.html
+#<br><small>Kweb 3</small><br>
+#<br>
+
+#!title=Epiphany Browser
+/usr/share/icons/Adwaita/48x48/apps/web-browser.png=epiphany-browser
+#<br><small>Epiphany</small><br>
+#<br>
+
+&#!title=Iceweasel Browser
+&/usr/share/pixmaps/iceweasel.png=iceweasel
+&#<br><small>Iceweasel</small><br>
+&#<br>
+
+#!next
+@elements of column 5
+#!title=Office  Suite
+/usr/share/icons/gnome/48x48/apps/libreoffice-base.png=libreoffice
+#<br><small>LibreOffice</small><br>
+#<br>
+
+#!title=Evince PDF Viewer
+/usr/share/icons/hicolor/48x48/apps/evince.png=evince
+#<br><small>Evince</small><br>
+#<br>
+
+#!next
+@elements of column 6
+#!title=Calculator
+/usr/share/icons/Adwaita/48x48/apps/accessories-calculator.png=galculator
+#<br><small>Calculator</small><br>
+#<br>
+
+#!title=Mathematica
+/usr/share/icons/hicolor/64x64/apps/wolfram-mathematica.png=mathematica
+#<br><small>Mathematica</small><br>
+#<br>
+
+#!next
+@elements of column 7
+#!title=Python 2.7 Editor
+/usr/share/icons/Adwaita/48x48/mimetypes/text-x-script.png=idle
+#<br><small>Idle</small><br>
+#<br>
+
+#!title=Python 3.4 Editor
+/usr/share/icons/Adwaita/48x48/mimetypes/text-x-script.png=idle-python3.4
+#<br><small>Idle3</small><br>
+#<br>
+
+&#!title=Source Code Editor
+&/usr/share/icons/Adwaita/48x48/mimetypes/text-x-script.png=gedit
+&#<br><small>Gedit</small><br>
+&#<br>
+
+#!next
+@elements of column 8
+#!title=Appearance Settings
+/usr/share/icons/Adwaita/48x48/apps/preferences-desktop-theme.png=lxappearance
+#<br><small>Appearance</small><br>
+#<br>
+
+#!title=Openbox Configuration
+/usr/share/pixmaps/obconf.png=obconf
+#<br><small>OpenB ox</small><br>
+#<br>
+
+#!title=Raspberry Pi Package Manager
+/usr/share/icons/Adwaita/48x48/apps/system-software-install.png=pi-packages
+#<br><small>Pi-Package</small><br>
+#<br>
+
+&#!title=Synaptic Package Manager
+&/usr/share/pixmaps/synaptic.png=gksudo synaptic
+&#<br><small>Synaptic</small><br>
+&#<br>
+
+#!next
+@elements of column 9: Links to web area
+#!target=area
+
+#!title=Empty
+/usr/share/icons/Adwaita/48x48/apps/web-browser.png=file:///usr/local/share/kweb/empty.html
+#<br><small>Empty</small><br>
+#<br>
+
+#!title=Web Search
+/usr/share/icons/Adwaita/48x48/apps/web-browser.png=https://www.startpage.com/
+#<br><small>Web Search</small><br>
+#<br>
+
+#!title=Wikipedia
+/usr/share/icons/Adwaita/48x48/apps/web-browser.png=https://www.wikipedia.org/
+#<br><small>Wikipedia</small><br>
+#<br>
+
+#!title=Raspberry Pi Forum Forum
+/usr/share/icons/Adwaita/48x48/apps/web-browser.png=https://www.raspberrypi.org/forum
+#<br><small>RPi Forum</small><br>
+#<br>
+
+#!title=Kweb Bookmarks Page
+/usr/share/pixmaps/minimalkioskbrowser.png=file:///usr/local/share/kweb/kweb_about_b.html
+#<br><small>Bookmarks</small><br>
+#<br>
+
+#!title=Kweb Utilities Page
+/usr/share/pixmaps/minimalkioskbrowser.png=file:///usr/local/share/kweb/kweb_about_u.html
+#<br><small>Utilities</small><br>
+#<br>
+
+#!title=Kweb Applications Page
+/usr/share/pixmaps/minimalkioskbrowser.png=file:///usr/local/share/kweb/kweb_about_a.html
+#<br><small>Applications</small><br>
+#<br>
+
+#!title=Kweb :Editor Page
+/usr/share/pixmaps/minimalkioskbrowser.png=file:///usr/local/share/kweb/kweb_about_e.html
+#<br><small>Editor</small><br>
+#<br>
+
+#!next
+@elements of column 10: Web Area
+#!iframew=1200px
+#!iframeh=100%
+#!title=area
+=file:///usr/local/share/kweb/empty.html

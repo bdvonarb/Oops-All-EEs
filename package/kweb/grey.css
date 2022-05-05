@@ -1,0 +1,172 @@
+html 
+{
+	height: 100%; 
+	width: 100%;
+}
+body
+{	
+	margin:0px;
+	padding:0px;
+	background-color: #333;
+	color: #ccc;
+	font-weight: normal;
+	font-style: normal;
+	font-family: FreeSans;
+	font-size: 12pt;
+	height: 100%;
+	width: 100%;
+}
+a:link
+{
+        color: #9ef;
+	border-color : #399;
+	font-weight: bold;
+        text-decoration: underline;
+}
+a:active
+{
+	color: #eff;
+	background-color : #000;
+	border-color : #399;
+	text-decoration: underline;
+	font-weight: bold;
+}
+a:visited
+{
+	color: #9ef;
+	border-color : #399;
+	font-weight: bold;
+        text-decoration: underline;
+}
+a:hover
+{
+        color:  #eff;
+	background-color : #000;
+	border-color : #399
+        text-decoration: underline;
+	font-weight: bold;
+}
+table
+{
+	font-weight: normal;
+	font-style: normal;
+	font-family: FreeSans;
+	border-color: #ccc;
+}
+th
+{
+	font-family: FreeSans;
+	font-weight: bold;
+	color: #eee;
+	background-color: #113;
+}
+td
+{
+	vertical-align:top;
+	text-align:left; 
+}
+h1
+{
+	font-weight: bold;
+	font-family: FreeSans;
+	font-style: normal;
+	font-size: 1.6em;
+	line-height: 160%;
+	margin: 0;
+	color: #eee;
+}
+h2
+{
+	font-weight: bold;
+	font-style: normal;
+	font-family: FreeSans;
+	font-size: 1.5em;
+	line-height: 150%;
+	margin: 0;
+	color: #eee;
+}
+h3
+{
+	font-weight: bold;
+	font-style: normal;
+	font-family: FreeSans;
+	font-size: 1.4em;
+	line-height: 140%;
+	margin: 0;
+	color: #eee;
+}
+h4
+{
+	font-weight: bold;
+	font-family: FreeSans;
+	font-style: normal;
+	font-size: 1.3em;
+	line-height: 130%;
+	margin: 0;
+	color: #eee;
+}
+h5
+{
+	font-weight: bold;
+	font-family: FreeSans;
+	font-style: normal;
+	font-size: 1.2em;
+	line-height: 120%;
+	margin: 0;
+	color: #eee;
+}
+h6
+{
+	font-weight: bold;
+	font-style: normal;
+	font-family: FreeSans;
+	font-size: 1.1em;
+	line-height: 110%;
+	margin: 0;
+	color: #eee;
+}
+hr
+{
+	color: #ccc;
+}
+button, input, textarea
+{
+	font-style: normal;
+	font-weight: bold;
+	font-family: FreeSans;
+	font-size: 12pt;
+	background-color: #111;
+	color: #eee;
+}
+label
+{
+	font-style: normal;
+	font-family: FreeSans;
+	color: #eee;
+}
+caption
+{
+	font-family: FreeSans;
+	font-style: normal;
+}
+
+legend
+{
+	font-style: normal;
+	font-family: FreeSans;
+}
+marquee
+{
+	font-family: FreeSans;
+}
+select
+{
+	border-style:solid;
+	font-style: normal;
+	font-family: FreeSans;
+	
+}
+iframe
+{
+	border-width: 0px;
+}

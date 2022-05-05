@@ -1,0 +1,19 @@
+#!/bin/bash
+cd ~/
+if [ -d ~/youtube-dl ]
+then
+echo "compiling modules ..."
+python ~/youtube-dl/youtube_dl/__main__.py --list-extractors > /dev/null 2>&1
+echo "creating binary ..."
+cd youtube-dl
+zip --quiet youtube-dl-temp youtube_dl/*.pyc youtube_dl/*/*.pyc
+zip --quiet --junk-paths youtube-dl-temp youtube_dl/__main__.py
+echo '#!/usr/bin/env python' > youtube-dl-temp
+cat youtube-dl-temp.zip >> youtube-dl-temp
+chmod a+x youtube-dl-temp
+rm youtube-dl-temp.zip
+sudo mv youtube-dl-temp /usr/bin/youtube-dl
+echo "Done. To update youtube-dl run update-ytdl and afterwards makebin-ytdl again."
+else
+echo "youtube-dl folder from github nor found - run ginstall-ytdl first"
+fi

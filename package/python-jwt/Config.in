@@ -1,0 +1,8 @@
+config BR2_PACKAGE_PYTHON_JWT
+	bool "python-jwt"
+	select BR2_PACKAGE_PYTHON_JWCRYPTO # runtime
+	select BR2_PACKAGE_PYTHON_JWCRYPTO # runtime
+	help
+	  Module for generating and verifying JSON Web Tokens.
+
+	  https://github.com/davedoesdev/python-jwt

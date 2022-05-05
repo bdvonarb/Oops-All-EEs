@@ -1,0 +1,12 @@
+config BR2_PACKAGE_PYTHON_EEL
+	bool "python-eel"
+	select BR2_PACKAGE_PYTHON_BOTTLE # runtime
+	select BR2_PACKAGE_PYTHON_BOTTLE_WEBSOCKET # runtime
+	select BR2_PACKAGE_PYTHON_FUTURE # runtime
+	select BR2_PACKAGE_PYTHON_PYPARSING # runtime
+	select BR2_PACKAGE_PYTHON_WHICHCRAFT # runtime
+	help
+	  For little HTML GUI applications, with easy Python/JS
+	  interop.
+
+	  https://github.com/samuelhwilliams/Eel

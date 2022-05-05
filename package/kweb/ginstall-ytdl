@@ -1,0 +1,37 @@
+#!/bin/sh
+if [ ! -d ~/youtube-dl ]
+then
+if [ -f /usr/bin/youtube-dl ]
+then
+echo "found an older version of youtube-dl. Trying to deinstall it ..."
+sudo dpkg -r youtube-dl
+fi
+if [ -f /usr/bin/youtube-dl ]
+then
+echo "Oops, still there, will remove it ..."
+sudo rm /usr/bin/youtube-dl
+fi
+if [ -h /usr/bin/youtube-dl ]
+then
+sudo rm /usr/bin/youtube-dl
+fi
+if [ ! -f /usr/bin/git ]
+then
+echo "install git ..."
+sudo apt-get -y install git
+fi
+echo "cloning git version of youtube-dl ..."
+cd ~/
+git clone https://github.com/rg3/youtube-dl.git
+echo
+echo "creating symbolic link"
+cd /usr/bin
+sudo ln -s ~/youtube-dl/youtube_dl/__main__.py youtube-dl
+cd
+echo "compiling modules ..."
+youtube-dl --list-extractors > /dev/null 2>&1
+echo "Done. To update youtube-dl run update-ytdl (there are new updates almost daily)"
+else
+echo "folder ~/youtube-dl already exists"
+fi
+

@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+#   Script to automatically perform builds of oops all ees components 
+#
+
+echo Welcome to the Oops All EEs build system
+echo would you like to build code for the [C]V device or for the [P]anel device?
+echo please type [C] or [P] without brackets
+
+read DEVICE
+
+if [ "$DEVICE" = "C" ];
+then
+    echo Starting build for CV device
+    if [ -d ../pi4-output ];
+    then
+        echo Output directory already exists
+        cd ../pi4-output
+        make cvdevice-dirclean
+        make all
+        cd ../buildroot-external-oopsallees
+    else
+        make BR2_EXTERNAL=../buildroot-external-oopsallees O=../pi4-output -C ../buildroot rpi_4_oopsallees_defconfig all 
+    fi
+elif [ "$DEVICE" = "P" ];
+then
+    echo Starting build for Panel device
+    if [ -d ../pi0-output ];
+    then
+        echo Output directory already exists
+        cd ../pi0-output
+        make paneldevice-dirclean
+        make all
+        cd ../buildroot-external-oopsallees
+    else
+        make BR2_EXTERNAL=../buildroot-external-oopsallees O=../pi0-output -C ../buildroot rpi_0_oopsallees_defconfig all 
+    fi
+else
+    echo Input: \'$DEVICE\' not recognized, please try again
+fi

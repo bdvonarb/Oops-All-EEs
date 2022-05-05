@@ -1,0 +1,4 @@
+config BR2_PACKAGE_KWEB
+	bool "kweb"
+	help
+		kiosk web browser on webkitgtk

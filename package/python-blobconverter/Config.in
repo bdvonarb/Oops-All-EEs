@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PYTHON_BLOBCONVERTER
+	bool "python-blobconverter"
+	select BR2_PACKAGE_PYTHON_BOTO3 # runtime
+	select BR2_PACKAGE_PYTHON_PYYAML # runtime
+	select BR2_PACKAGE_PYTHON_REQUESTS # runtime
+	help
+	  The tool that allows you to convert neural networks to
+	  MyriadX blob.
+
+	  https://github.com/luxonis/blobconverter

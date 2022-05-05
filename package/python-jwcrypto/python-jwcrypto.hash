@@ -1,0 +1,5 @@
+# md5, sha256 from https://pypi.org/pypi/jwcrypto/json
+md5  c665a34696d9f6250c312b7dc466bbd3  jwcrypto-1.0.tar.gz
+sha256  f88816eb0a41b8f006af978ced5f171f33782525006cdb055b536a40f4d46ac9  jwcrypto-1.0.tar.gz
+# Locally computed sha256 checksums
+sha256  da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768  LICENSE

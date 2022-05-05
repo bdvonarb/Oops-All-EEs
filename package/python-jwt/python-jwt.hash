@@ -1,0 +1,5 @@
+# md5, sha256 from https://pypi.org/pypi/python-jwt/json
+md5  29a52ea84c8967887911e275f8b599c7  python_jwt-3.3.2.tar.gz
+sha256  d40d0f5cdbb37f85f2d80868891a194e02424be16593e617136b9f151e966e51  python_jwt-3.3.2.tar.gz
+# Locally computed sha256 checksums
+sha256  e1a11183bc56559f8800325f4e179f173ca92794b3cb0dfa8c1ec3b223a86491  LICENCE

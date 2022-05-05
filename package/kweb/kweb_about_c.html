@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <title>Minimal Kiosk Browser Configuration Page</title>
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+<link rel="stylesheet" type="text/css" href="file:///usr/local/share/kweb/about.css">
+</head>
+<body>
+<h2>Minimal Kiosk Browser Configuration</h2>
+Your current browser settings are shown below. You can edit them and save a new configuration in the form below. Check the manual for a detailed explanation of all options.<br>
+<hr>
+<form accept-charset="utf-8" enctype="application/x-www-form-urlencoded" method="get" action="file:///homepage.html" name="about_config">
+<input name="cmd" value="formdataintern" type="hidden">
+<input name="proc" value="set" type="hidden">
+<table cellspacing="10"><tr><td width="35%">
+<!--splitter-->
+<b>Global Program Options</b><br>
+No options selected equals the default settings, when running the browser without a config file or command line options.<br>
+You can choose any combination, that makes sense (some are mutually exclusive, the last one will prevail).<br>
+<b>-- Toolbar Presets</b><br>
+<input type="checkbox" name="gopts" value="Z">Enable Full Zoom (Z)<br>
+<input type="checkbox" name="gopts" value="J">Enable JavaScript (J)<br>
+<input type="checkbox" name="gopts" value="E">Enable Cookies (E)<br>
+<input type="checkbox" name="gopts" value="W">Disable Download Manager (W)<br>
+<input type="checkbox" name="gopts" value="Y">Disable Omxplayer (Y)<br>
+<input type="checkbox" name="gopts" value="I">Use Only Icons (I)<br>
+<input type="checkbox" name="gopts" value="T">Use Only Text Buttons (T)<br>
+<input type="checkbox" name="gopts" value="S">Small Icon Size (S)<br>
+<b>--- Program Options</b><br>
+<input type="checkbox" name="gopts" value="X">Open Executable Files (X)<br>
+<input type="checkbox" name="gopts" value="A">Use Left-ALT in Kiosk Mode (A)<br>
+<input type="checkbox" name="gopts" value="H">Set URL as Homepage (H)<br>
+<input type="checkbox" name="gopts" value="L">Enable Localhost Command Interface (L)<br>
+<input type="checkbox" name="gopts" value="G">Use Google Search Unprotected (G)<br>
+<b>--- Window Options</b><br>
+<input type="checkbox" name="gopts" value="V">Don't Show Page Title as Window Title (V)<br>
+<input type="checkbox" name="gopts" value="M">Don't Maximize (M)<br>
+<input type="checkbox" name="gopts" value="K">Run In Kiosk Mode (K)<br>
+<input type="checkbox" name="gopts" value="N">No Fullscreen in Kiosk Mode (N)<br>
+<input type="checkbox" name="gopts" value="R">Don't Allow New Windows in Kiosk Mode (R)<br>
+<b>--- Webkit Options</b><br>
+<input type="checkbox" name="gopts" value="P">Disable Private Browsing (P)<br>
+<input type="checkbox" name="gopts" value="B">Enable Page Cache (B)<br>
+<input type="checkbox" name="gopts" value="F">Enable media-stream, mediasource, webaudio (experimental) (F)<br>
+<input type="checkbox" name="gopts" value="O">Disable Auto-start of Video (O)<br>
+<input type="checkbox" name="gopts" value="Q">Enable Smooth Scrolling (Q)<br>
+</td>
+<!--splitter-->
+<td width="30%">
+<b>Cache Settings</b><br>
+Only one option can be selected.<br>
+<input type="radio" name="copts" value="" checked>Web Browser Cache Model (default)<br>
+<input type="radio" name="copts" value="U">Document Viewer Model, no Cache (U)<br>
+<input type="radio" name="copts" value="D">Document Browser Cache Model (D)<br>
+<!--splitter-->
+<br>
+<b>Window Size Setting</b><br>
+Only one option can be selected.<br>
+<input type="radio" name="sopts" value="0">640 x 480 (0)<br>
+<input type="radio" name="sopts" value="1">768 x 576 (1)<br>
+<input type="radio" name="sopts" value="2">800 x 480 (2)<br>
+<input type="radio" name="sopts" value="3">800 x 600 (3)<br>
+<input type="radio" name="sopts" value="4">1024 x 768 (4)<br>
+<input type="radio" name="sopts" value="5">1280 x 720 (5)<br>
+<input type="radio" name="sopts" value="6">1366 x 768 (6)<br>
+<input type="radio" name="sopts" value="7">1600 x 900 (7)<br>
+<input type="radio" name="sopts" value="8">1600 x 1050 (8)<br>
+<input type="radio" name="sopts" value="" checked>1920 x 1080 (default)<br>
+<input type="radio" name="sopts" value="9">1920 x 1200 (9)<br>
+<!--splitter-->
+<br><b>Keyboard Commands</b><br>
+By default, all keyboard commands are enabled. They have to be used together with the left ALT-Key, except in kiosk mode, when the ALT option is not set. The full set of commands is:<br><b><i>+-zbhrqfpoklgtjneduwxyavcsmi#?!.,</i></b><br>
+<input name="kopts" type="text" size="33" maxlength="33" value="+-zbhrqfpoklgtjneduwxyavcsmi#?!.,"><!--splitter-->
+</td><td>
+<b>List of Keyboard Commands: (ALT+)</b><br>
+<table cellspacing="0" cellpadding="0"><tr><td>
+</td><td><b>Toolbar Commands</b></td></tr><tr><td>
+o</td><td>Open File</td></tr><tr><td>
+b</td><td>Back</td></tr><tr><td>
+s</td><td>Stop Loading</td></tr><tr><td>
+r</td><td>Reload</td></tr><tr><td>
+h</td><td>Home</td></tr><tr><td>
+p</td><td>Play Web Video</td></tr><tr><td>
++</td><td>Zoom +10%</td></tr><tr><td>
+-</td><td>Zoom -10%</td></tr><tr><td>
+z</td><td>Zoom 100%</td></tr><tr><td>
+g</td><td>General Zoom</td></tr><tr><td>
+t</td><td>Text Zoom only</td></tr><tr><td>
+j</td><td>Javascript</td></tr><tr><td>
+n</td><td>No Javascript</td></tr><tr><td>
+e</td><td>Enable Cookies</td></tr><tr><td>
+d</td><td>Disable Cookies</td></tr><tr><td>
+u</td><td>Uget Download Manager</td></tr><tr><td>
+w</td><td>Wget Download</td></tr><tr><td>
+x</td><td>omXplayer on</td></tr><tr><td>
+y</td><td>omxplayer off</td></tr><tr><td>
+a</td><td>Activate command execution</td></tr><tr><td>
+v</td><td>Veto command execution</td></tr><tr><td>
+</td><td><b>Program Commands</b></td></tr><tr><td>
+q</td><td>Quit Program</td></tr><tr><td>
+c</td><td>Close Current Window</td></tr><tr><td>
+f</td><td>Toggle Full Screen</td></tr><tr><td>
+k</td><td>Toggle Kiosk Mode</td></tr><tr><td>
+m</td><td>Toggle Maximized View</td></tr><tr><td>
+l</td><td>Localize Home</td></tr><tr><td>
+!</td><td>Toogle Source View</td></tr><tr><td>
+,</td><td>Bookmark Page</td></tr><tr><td>
+?</td><td>Search Similar</td></tr><tr><td>
+i</td><td>Clear and Activate Entry Line</td></tr><tr><td>
+</td><td><b>Open Commands</b></td></tr><tr><td>
+.</td><td>Open Current Page in New Browser</td></tr><tr><td>
+0 ... 9&nbsp;</td><td>Run User Defined Function Pages</td></tr></table>
+</td></tr></table>
+<hr>
+<b>URL for Start Page and (Optionally) Home Page</b><br>
+If nothing is entered here, kweb's menu page will be the start page and home page (called from the 'Home' button). You can also create your own "homepage.html" file in /usr/local/share/kweb and then this will be used automatically.<br>
+<input name="url" type="text" size="60" value=""><!--splitter-->
+<hr>
+<input value="Save Configuration " type="submit"> The new configuration will only take effect after restarting Minimal Kiosk Browser.
+</form>
+<hr>
+<center><h3>Presets</h3></center>
+<table cellspacing="10"><tr><td width="33%">
+<form accept-charset="utf-8" enctype="application/x-www-form-urlencoded" method="get" action="file:///homepage.html" name="preset1">
+<input name="cmd" value="formdataintern" type="hidden">
+<input name="proc" value="delete" type="hidden">
+<input value="Reset to Defaults" type="submit">
+<br>Use the standard configuration
+</form>
+</td><td width="33%">
+<form accept-charset="utf-8" enctype="application/x-www-form-urlencoded" method="get" action="file:///homepage.html" name="preset2">
+<input name="cmd" value="formdataintern" type="hidden">
+<input name="proc" value="set" type="hidden">
+<input name="gopts" value="ZWIMX" type="hidden">
+<input name="copts" value="U" type="hidden">
+<input name="sopts" value="3" type="hidden">
+<input name="kopts" value="+-zbhrqfpoklgtjneduwxyavcsmi#?!.," type="hidden">
+<input name="url" value="file:///usr/local/share/kweb/kweb_about_o.html" type="hidden">
+<input value="Simple Document Viewer" type="submit">
+<br>Lowest resources, opens to omxplayerGUI web frontend.
+</form>
+</td><td>
+<form accept-charset="utf-8" enctype="application/x-www-form-urlencoded" method="get" action="file:///homepage.html" name="preset3">
+<input name="cmd" value="formdataintern" type="hidden">
+<input name="proc" value="set" type="hidden">
+<input name="gopts" value="Z" type="hidden">
+<input name="copts" value="D" type="hidden">
+<input name="sopts" value="3" type="hidden">
+<input name="kopts" value="+-zbhrqfpoklgtjneduwxyavcsmi#?!.," type="hidden">
+<input value="Low Resources Browser" type="submit">
+<br>For local documents and simple web browsing
+</form>
+</td></tr><tr><td>
+<form accept-charset="utf-8" enctype="application/x-www-form-urlencoded" method="get" action="file:///homepage.html" name="preset4">
+<input name="cmd" value="formdataintern" type="hidden">
+<input name="proc" value="set" type="hidden">
+<input name="gopts" value="ZJEPBFQ" type="hidden">
+<input name="copts" value="" type="hidden">
+<input name="sopts" value="3" type="hidden">
+<input name="kopts" value="+-zbhrqfpoklgtjneduwxyavcsmi#?!.," type="hidden">
+<input value="Full Power Browser" type="submit">
+<br>Uses all possible features and needs the most resources
+</form>
+</td><td>
+<form accept-charset="utf-8" enctype="application/x-www-form-urlencoded" method="get" action="file:///homepage.html" name="preset5">
+<input name="cmd" value="formdataintern" type="hidden">
+<input name="proc" value="set" type="hidden">
+<input name="gopts" value="ZEIHM" type="hidden">
+<input name="copts" value="" type="hidden">
+<input name="sopts" value="3" type="hidden">
+<input name="kopts" value="+-zbhrqfpoklgtjneduwxyavcsmi#?!.," type="hidden">
+<input name="url" value="https://www.youtube.com/" type="hidden">
+<input value="Youtube Viewer" type="submit">
+<br>For dedicated youtube use; Javascript disabled for much faster access (although not as nice).
+</form>
+</td><td>
+<form accept-charset="utf-8" enctype="application/x-www-form-urlencoded" method="get" action="file:///homepage.html" name="preset5">
+<input name="cmd" value="formdataintern" type="hidden">
+<input name="proc" value="set" type="hidden">
+<input name="gopts" value="KAX" type="hidden">
+<input name="copts" value="D" type="hidden">
+<input name="sopts" value="" type="hidden">
+<input name="kopts" value="+-zbhrqfpoklgtjneduwxyavcsmi#?!.," type="hidden">
+<input name="url" value="file:///usr/local/share/kweb/kweb_about_a.html" type="hidden">
+<input value="Kiosk Browser" type="submit">
+<br>Full screen with keyboard control; demonstrates kweb's command execution interface
+</form>
+</td></tr></table>
+Reload the page (via toolbox icon or with ALT+r) after applying one of the presets to see the detailed configuration. You can then modify it in any way you like.
+</body></html>

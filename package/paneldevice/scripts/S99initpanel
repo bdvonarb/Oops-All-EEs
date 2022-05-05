@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# start oaee panel
+#
+
+start() {
+	echo Starting OAEE Panel > /dev/kmsg
+	#use hciattach to connect pi's onboard bluetooth hardware to the blueZ stack
+	hciattach /dev/ttyS0 bcm43xx 921600 - > /dev/kmsg
+	sleep 2
+ 
+	#allow no-input-no-output pairing with the device
+	#technically this is unnescessary as the devices no longer autopair
+	bt-agent -c NoInputNoOutput & > /dev/kmsg
+
+	#use bluetoothctl to setup bluetooth device, power on, and set as discoverable
+	bluetoothctl -- system-alias 'OAEE_PANEL' > /dev/kmsg
+	bluetoothctl -- discoverable-timeout 0 > /dev/kmsg
+	bluetoothctl -- power on > /dev/kmsg
+	bluetoothctl -- discoverable on > /dev/kmsg
+
+	bluetoothctl -- pair E4:5F:01:3B:13:CA > /dev/kmsg
+	bluetoothctl -- trust E4:5F:01:3B:13:CA > /dev/kmsg
+	
+	/root/paneldevice &
+}
+
+stop() {
+	echo Stopping OAEE Panel > /dev/kmsg
+	bluetoothctl -- power off > /dev/kmsg
+}
+s
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start|stop|restart)
+	"$1"
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

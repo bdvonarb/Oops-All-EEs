@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# Non-exiting script to attach bluetooth device audio stream to partynet named pipe
+# Also auto trusts new devices
+#
+
+MACREGEX="^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$"
+
+while true
+do
+    #get MAC
+    MAC=$(bluetoothctl -- info | awk '$1=="Device"{print $2}')
+
+    if [[ "${MAC}" =~ ${MACREGEX} ]]
+    then
+        echo Connected device MAC: ${MAC}
+
+        #test trusted
+        if [[ $(bluetoothctl -- info | awk '$1=="Trusted:"{print $2}') = no ]]
+        then
+            echo Device not trusted, trusting now
+            bluetoothctl -- trust ${MAC}
+        fi
+
+        #see if partynet is already running
+        if [[ -z "$(ps aux | awk '$3=="partynet"{print $1}')" ]]
+        then
+            #attach audio out to partynet
+            echo Attaching arecord to pipe
+            arecord -q -f cd -c1 -t raw -D bluealsa:DEV=${MAC} /tmp/partyfifo &
+        fi
+    else 
+        echo No connected device
+        #kill running instance of arecord if it exists
+
+        if [[ -n "$(ps aux | awk '$3=="arecord"{print $1}')" ]]
+        then
+            kill $(ps aux | awk '$3=="arecord"{print $1}')
+        fi
+    fi
+    sleep 5
+done

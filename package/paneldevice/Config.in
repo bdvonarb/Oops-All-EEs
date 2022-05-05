@@ -1,0 +1,4 @@
+config BR2_PACKAGE_PANELDEVICE
+	bool "paneldevice"
+	help
+		OAEE LED panel
